@@ -23,7 +23,6 @@ document.getElementById("send_btn").onclick = search; // This gets the id of the
 
 function search(){
     submit() // This runs a function which returns an API request for songs with the title of the search bar
-//    .then(data => console.log(JSON.stringify(data)))
 
 // I found this example to create a table from this website
 // https://www.encodedna.com/javascript/populate-json-data-to-html-table-using-javascript.htm
@@ -47,9 +46,8 @@ function search(){
         var divContainer = document.getElementById("content");
         divContainer.innerHTML = "";
         divContainer.appendChild(table);
-    });
-//    .then(data => document.getElementById('content').innerHTML = data.tracks.items[0].album.name)
-//    .catch(error => console.error(error));
+    })
+    .catch(error => console.error(error));
 }
 
 function submit(){
