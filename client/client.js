@@ -12,7 +12,7 @@ postData(`https://api.spotify.com/v1/audio-features/06AKEBrKUckW0KREUWRnvT`)
 function postData(url = ''){
   return fetch(url, {
     headers: {
-      "Authorization": "Bearer BQC8koCCP8u_i_c6jtXeqG8mza5CCknWmsjwJm8idJWFRTKM7NJeqhDulMJWMGobJzuporbCq7SH8WnsmWcpHPVL6ElQtFnjb8Agp4j9r9lyiImvxQ60NEyvUFB2dIfndJhSt6QgR4djwY7L2TgTAzpjVBa7YD4AJwu4JEYFLnFRQBUScjBRtovzpHA2n6i-rKQ5mQ"
+      "Authorization": "Bearer BQCKyRsLzOGGbWmDnz9L864u-IDkCZSV02KBWc0zhLqj_F0eu_5bezhyZLs22haUXmLV10hV-nv8SbZVcZxF0J6CP2HBd8RtOX7eTBQMqPUwpJ1VfkbRZ6Ylx4yqg1igX0VCtapT-8P6WIQKwNnqsiEcAwk83EIhm6pxEjlx-k-WyVj_27boyV429IACtAuK9XcFSQ"
     },
     body: JSON.stringify()
   })
@@ -56,7 +56,7 @@ function submit(){
 
     return fetch(url, {
         headers: {
-            "Authorization": "Bearer BQDdVhEYnxXdHkgGTGDZe6HjKDtIfViyHSZgL86yrNHOKbRUiOOTXveV0SCDLhZtL65a52unWdUO252fG3ErJxy5mm0g1VWwvZiTse0OZ4CUqSmOrqndJBv-NL5GZfilS95gMptc5G4Vis306baRQpWG7Btn8b82Du98aSVje5309t0eJYYH8vhRzMo3fi2oZx0X3g"
+            "Authorization": "Bearer BQCKyRsLzOGGbWmDnz9L864u-IDkCZSV02KBWc0zhLqj_F0eu_5bezhyZLs22haUXmLV10hV-nv8SbZVcZxF0J6CP2HBd8RtOX7eTBQMqPUwpJ1VfkbRZ6Ylx4yqg1igX0VCtapT-8P6WIQKwNnqsiEcAwk83EIhm6pxEjlx-k-WyVj_27boyV429IACtAuK9XcFSQ"
         },
         body: JSON.stringify()
     })
