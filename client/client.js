@@ -4,10 +4,10 @@
 //  .then(body => document.getElementById('content').innerHTML=body)
 //});
 
-postData(`https://api.spotify.com/v1/audio-features/06AKEBrKUckW0KREUWRnvT`)
-//  .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-  .then(data => document.getElementById('content').innerHTML = data.tempo)
-  .catch(error => console.error(error));
+//postData('https://api.spotify.com/v1/audio-features/06AKEBrKUckW0KREUWRnvT')
+////  .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+//  .then(data => document.getElementById('content').innerHTML = data.tempo)
+//  .catch(error => console.error(error));
 
 function postData(url = ''){
   return fetch(url, {
