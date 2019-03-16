@@ -4,9 +4,9 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
-var client_id = "8f456770a0c5460eaff16e6476344bc5"
-var client_secret = "00fa8fe4d3e8479eb1509bcdc03c7800"
-var redirect_uri = "http://127.0.0.1:8090/callback"
+var client_id = '8f456770a0c5460eaff16e6476344bc5';
+var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
+var redirect_uri = 'http://127.0.0.1:8090/callback';
 
 
 var generateRandomString = function(length) {
@@ -25,11 +25,11 @@ var stateKey = 'spotify_auth_state';
 var app = express();
 
 app.use(express.static('client'))
-   .use(cors())
-   .use(cookieParser());
+  .use(cors())
+  .use(cookieParser());
 
 app.get('/login', function(req, res) {
-   var state = generateRandomString(16);
+  var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
   // your application requests authorization
@@ -77,7 +77,7 @@ app.get('/callback', function(req, res) {
       if (!error && response.statusCode === 200) {
 
         var access_token = body.access_token,
-            refresh_token = body.refresh_token;
+          refresh_token = body.refresh_token;
 
         var options = {
           url: 'https://api.spotify.com/v1/me',
