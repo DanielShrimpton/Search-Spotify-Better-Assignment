@@ -8,16 +8,16 @@
 ////  .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
 //  .then(data => document.getElementById('content').innerHTML = data.tempo)
 //  .catch(error => console.error(error));
-
-function postData(url = ''){
-  return fetch(url, {
-    headers: {
-      'Authorization': 'Bearer BQCKyRsLzOGGbWmDnz9L864u-IDkCZSV02KBWc0zhLqj_F0eu_5bezhyZLs22haUXmLV10hV-nv8SbZVcZxF0J6CP2HBd8RtOX7eTBQMqPUwpJ1VfkbRZ6Ylx4yqg1igX0VCtapT-8P6WIQKwNnqsiEcAwk83EIhm6pxEjlx-k-WyVj_27boyV429IACtAuK9XcFSQ'
-    },
-    body: JSON.stringify()
-  })
-    .then(response => response.json());
-}
+// 
+// function postData(url = ''){
+//   return fetch(url, {
+//     headers: {
+//       'Authorization': 'Bearer BQCKyRsLzOGGbWmDnz9L864u-IDkCZSV02KBWc0zhLqj_F0eu_5bezhyZLs22haUXmLV10hV-nv8SbZVcZxF0J6CP2HBd8RtOX7eTBQMqPUwpJ1VfkbRZ6Ylx4yqg1igX0VCtapT-8P6WIQKwNnqsiEcAwk83EIhm6pxEjlx-k-WyVj_27boyV429IACtAuK9XcFSQ'
+//     },
+//     body: JSON.stringify()
+//   })
+//     .then(response => response.json());
+// }
 
 document.getElementById('send_btn').onclick = search; // This gets the id of the submit button and onclick will run the function search()
 
