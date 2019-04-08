@@ -23,16 +23,26 @@ document.getElementById('send_btn').onclick = search; // This gets the id of the
 
 function search(){
 
-	submit() // This runs a function which returns an API request for songs with the title of the search bar
+	var search = document.getElementById('txt_field').value; // This gets the value of the search bar
 
+	// submit() // This runs a function which returns an API request for songs with the title of the search bar
+	fetch('/search', {
+		headers: {text: search}
+	})
 	// I found this example to create a table from this website
 	// https://www.encodedna.com/javascript/populate-json-data-to-html-table-using-javascript.htm
+		.then(function(response) {
 
+			console.log(response);
+			return response.json();
+
+		})
 		.then(function(data) {
 
+			console.log(data.body);
 			var table = document.createElement('table');
 
-			for (var i = 0; i < data.tracks.items.length; i++){
+			for (var i = 0; i < data.body.tracks.items.length; i++){
 
 				var tr = table.insertRow(-1);
 
@@ -56,17 +66,45 @@ function search(){
 
 }
 
-function submit(){
+// function submit(){
 
-	var search = document.getElementById('txt_field').value; // This gets the value of the search bar
-	var url = 'https://api.spotify.com/v1/search?q=name:'+search+'&type=track'; // Combines the search URL and the search criteria
+// 	var search = document.getElementById('txt_field').value; // This gets the value of the search bar
+// 	var url = 'https://api.spotify.com/v1/search?q=name:'+search+'&type=track'; // Combines the search URL and the search criteria
 
-	return fetch(url, {
-		headers: {
-			'Authorization': 'Bearer BQCKyRsLzOGGbWmDnz9L864u-IDkCZSV02KBWc0zhLqj_F0eu_5bezhyZLs22haUXmLV10hV-nv8SbZVcZxF0J6CP2HBd8RtOX7eTBQMqPUwpJ1VfkbRZ6Ylx4yqg1igX0VCtapT-8P6WIQKwNnqsiEcAwk83EIhm6pxEjlx-k-WyVj_27boyV429IACtAuK9XcFSQ'
-		},
-		body: JSON.stringify()
-	})
-		.then(response => response.json());
+// 	return fetch(url, {
+// 		headers: {
+// 			'Authorization': 'Bearer ' + access_token
+// 		},
+// 		body: JSON.stringify()
+// 	})
+// 		.then(response => response.json());
 
-}
+// }
+
+document.getElementById('loggin').addEventListener('click', function() {
+
+	window.location = ('/login');
+
+});
+
+fetch('/details')
+	.then(response => response.json())
+	.then(function(data){
+
+		// data = data.json();
+		if (data.display_name) {
+
+			document.getElementById('u_name').innerHTML = 'Signed in as ' + data.display_name;
+			$('#login').hide();
+			$('#loggedin').show();
+
+		}
+		else {
+
+			console.log(data);
+			$('#login').show();
+			$('#loggedin').hide();
+
+		}
+
+	});
