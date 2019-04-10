@@ -3,17 +3,64 @@ var request = require('request');
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
-var SpotifyWebApi = require('spotify-web-api-node');
-var fs = require('fs');
+var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 require('dotenv').config;
+
+
+var app = express();
+
+app.use(express.static('client'))
+	.use(cors())
+	.use(cookieParser());
+
+// ALL OF THE FEATURES FOR PAGE TO WORK
+
+
+app.get('/logout', function(req, res) {
+
+	process.env.ACCESS_TOKEN = '';
+	process.env.REFRESH_TOKEN = '';
+	process.env.USER = '';
+	res.clearCookie();
+	res.redirect('/');
+
+});
+
+
+app.get('/details', function(req, res) {
+
+	res.send({display_name: process.env.USER});
+
+});
+
+app.get('/search', function(req, res){
+
+	var text = req.get('text');
+	var url = 'https://api.spotify.com/v1/search?q=name:'+text+'&type=track';
+	var content = httpGet(url);
+	res.send(content);
+
+});
+
+function httpGet(url){
+
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open('GET', url, false);
+	xmlHttp.setRequestHeader('Authorization', 'Bearer '+process.env.ACCESS_TOKEN);
+	xmlHttp.send(null);
+	return xmlHttp.responseText;
+
+}
+
+
+// SPOTIFY AUTH FUNCTIONS FROM HERE ON
 
 var client_id = '8f456770a0c5460eaff16e6476344bc5';
 var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
 // var redirect_uri = 'http://127.0.0.1:8090/callback';
 var redirect_uri = 'http://localhost:8090/callback';
 
-var spotifyApi = new SpotifyWebApi();
-
+// SPOTIFY FUNCTION
 
 var generateRandomString = function(length) {
 
@@ -32,11 +79,6 @@ var generateRandomString = function(length) {
 
 var stateKey = 'spotify_auth_state';
 
-var app = express();
-
-app.use(express.static('client'))
-	.use(cors())
-	.use(cookieParser());
 
 app.get('/login', function(req, res) {
 
@@ -95,9 +137,8 @@ app.get('/callback', function(req, res) {
 
 				var access_token = body.access_token,
 					refresh_token = body.refresh_token;
-				process.env.ACCESS_TOKEN = access_token;
+				process.env.ACCESS_TOKEN = access_token; // Added in to create environment variables so server can acces
 				process.env.REFRESH_TOKEN = refresh_token;
-				spotifyApi.setAccessToken(access_token);
 				// console.log(access_token);
 
 				var options = {
@@ -110,7 +151,7 @@ app.get('/callback', function(req, res) {
 				request.get(options, function(error, response, body) {
 
 					console.log(body);  // where body is info like Username, product e.g. premium, country etc.
-					process.env.USER = body.display_name;
+					process.env.USER = body.display_name; // Another environment variable for server to use
 
 				});
 
@@ -157,97 +198,12 @@ app.get('/refresh_token', function(req) {
 		if (!error && response.statusCode === 200) {
 
 			var access_token = body.access_token;
-			process.env.ACCESS_TOKEN = access_token;
-			// res.send({
-			// 	'access_token': access_token
-			// });
+			process.env.ACCESS_TOKEN = access_token; // ADDED IN SO SERVER CAN ACCESS
 
 		}
 
 	});
 
 });
-
-
-app.get('/logout', function(req, res) {
-
-	process.env.ACCESS_TOKEN = '';
-	process.env.REFRESH_TOKEN = '';
-	process.env.USER = '';
-	res.clearCookie();
-	res.redirect('/');
-
-});
-
-
-app.get('/details', function(req, res) {
-
-	res.send({display_name: process.env.USER});
-
-});
-
-
-app.get('/search', async function(req, res){
-
-	var text = req.get('text');
-	let response = await spotifyApi.searchTracks('track:' + text, {limit: 10}, function(err, data){
-
-		if (err){
-
-			console.error(err);
-
-		} else {
-
-			fs.writeFile('test.json', JSON.stringify(data.body),function(err){
-
-				if (err) {
-
-					console.error(err);
-
-				}
-
-			});
-
-		}
-
-	});
-	console.log(response);
-	// res.sendFile(__dirname+'/test.json');
-	res.sendFile(__dirname+'/test.json');
-	// res.json({'search':text});
-
-});
-
-app.get('/test', async function(req, res){
-
-	var text = req.get('text');
-	let response = await spotifyApi.searchTracks('track:' + text, {limit: 10}, function(err, data){
-
-		if (err){
-
-			console.error(err);
-
-		} else {
-
-			fs.writeFile('test.json', JSON.stringify(data.body),function(err){
-
-				if (err) {
-
-					console.error(err);
-
-				}
-
-			});
-
-		}
-
-	});
-	console.log(response);
-	// res.sendFile(__dirname+'/test.json');
-	res.sendFile(__dirname+'/test.json');
-	// res.json({'search':text});
-
-});
-
 
 app.listen(8090);
