@@ -31,18 +31,13 @@ function search(){
 	})
 	// I found this example to create a table from this website
 	// https://www.encodedna.com/javascript/populate-json-data-to-html-table-using-javascript.htm
-		.then(function(response) {
-
-			console.log(response);
-			return response.json();
-
-		})
+		.then(response => response.text())
 		.then(function(data) {
 
-			console.log(data.body);
+			data = JSON.parse(data);
 			var table = document.createElement('table');
 
-			for (var i = 0; i < data.body.tracks.items.length; i++){
+			for (var i = 0; i < data.tracks.items.length; i++){
 
 				var tr = table.insertRow(-1);
 
@@ -69,23 +64,17 @@ function search(){
 // function submit(){
 
 // 	var search = document.getElementById('txt_field').value; // This gets the value of the search bar
-// 	var url = 'https://api.spotify.com/v1/search?q=name:'+search+'&type=track'; // Combines the search URL and the search criteria
+// 	// var url = 'https://api.spotify.com/v1/search?q=name:'+search+'&type=track'; // Combines the search URL and the search criteria
 
-// 	return fetch(url, {
+// 	return fetch('/search', {
 // 		headers: {
-// 			'Authorization': 'Bearer ' + access_token
-// 		},
-// 		body: JSON.stringify()
+// 			'text': search
+// 		}
 // 	})
-// 		.then(response => response.json());
+// 		.then(response => response.json())
+// 		.catch(err => console.error(err));
 
 // }
-
-document.getElementById('loggin').addEventListener('click', function() {
-
-	window.location = ('/login');
-
-});
 
 fetch('/details')
 	.then(response => response.json())
@@ -108,3 +97,22 @@ fetch('/details')
 		}
 
 	});
+
+
+// function search2(){
+
+// 	var search = document.getElementById('txt_field').value;
+// 	fetch('/test', {
+// 		headers: {text: search}
+// 	})
+// 		.then(response => response.text())
+// 		.then(function(data){
+
+// 			data = JSON.parse(data);
+// 			console.log(data.tracks.items[1]);
+
+// 		})
+// 		.catch(err => console.error(err));
+
+// }
+// // search2();
