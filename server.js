@@ -4,6 +4,7 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var SpotifyWebApi = require('spotify-web-api-node');
+var fs = require('fs');
 require('dotenv').config;
 
 var client_id = '8f456770a0c5460eaff16e6476344bc5';
@@ -97,6 +98,7 @@ app.get('/callback', function(req, res) {
 				process.env.ACCESS_TOKEN = access_token;
 				process.env.REFRESH_TOKEN = refresh_token;
 				spotifyApi.setAccessToken(access_token);
+				// console.log(access_token);
 
 				var options = {
 					url: 'https://api.spotify.com/v1/me',
@@ -185,28 +187,65 @@ app.get('/details', function(req, res) {
 });
 
 
-app.get('/search', function(req, res) {
+app.get('/search', async function(req, res){
 
 	var text = req.get('text');
-	var sending = spotifyApi.searchTracks('track:'+text)
-		.then(function(data) {
+	let response = await spotifyApi.searchTracks('track:' + text, {limit: 10}, function(err, data){
 
-			// console.log(JSON.stringify(data.body));
-			return data.body.tracks;
+		if (err){
 
-		}, function(err) {
+			console.error(err);
 
-			console.log(err);
+		} else {
 
-		});
+			fs.writeFile('test.json', JSON.stringify(data.body),function(err){
 
-	// console.log(sending);
-	res.send(sending.then(function(result){
+				if (err) {
 
-		return result;
+					console.error(err);
 
-	}));
-	// res.send(sending);
+				}
+
+			});
+
+		}
+
+	});
+	console.log(response);
+	// res.sendFile(__dirname+'/test.json');
+	res.sendFile(__dirname+'/test.json');
+	// res.json({'search':text});
+
+});
+
+app.get('/test', async function(req, res){
+
+	var text = req.get('text');
+	let response = await spotifyApi.searchTracks('track:' + text, {limit: 10}, function(err, data){
+
+		if (err){
+
+			console.error(err);
+
+		} else {
+
+			fs.writeFile('test.json', JSON.stringify(data.body),function(err){
+
+				if (err) {
+
+					console.error(err);
+
+				}
+
+			});
+
+		}
+
+	});
+	console.log(response);
+	// res.sendFile(__dirname+'/test.json');
+	res.sendFile(__dirname+'/test.json');
+	// res.json({'search':text});
 
 });
 
