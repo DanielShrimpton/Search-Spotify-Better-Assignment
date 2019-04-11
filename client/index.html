@@ -17,6 +17,12 @@
         white-space: nowrap;
         width: 500px;
       }
+      td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 50ch;
+      }
       body {
         padding-top: 80px;
       }
@@ -32,7 +38,7 @@
   <body>
     <header>
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand">BPM Finder</a>
+        <a class="navbar-brand" style="color:lightgrey">BPM Finder</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -86,7 +92,7 @@
       </nav>
     </header>
     <div class="d-flex justify-content-center">
-      <div id="content" class="col-sm-8"></div>
+      <div id="content"></div>
     </div>
     
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
