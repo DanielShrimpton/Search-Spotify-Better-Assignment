@@ -40,8 +40,9 @@ app.get('/details', function(req, res) {
 
 app.get('/search', function(req, res){
 
-	var text = req.get('text');
-	var url = 'https://api.spotify.com/v1/search?q=name:'+text+'&type=track&limit=50&market='+process.env.MARKET;
+	var text = req.get('text'),
+		type = req.get('Type');
+	var url = 'https://api.spotify.com/v1/search?query='+text+'&type='+type+'&limit=50&market='+process.env.MARKET;
 	var content = httpGet(url);
 	res.send(content);
 
