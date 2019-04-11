@@ -1,78 +1,154 @@
-//postData('https://api.spotify.com/v1/audio-features/06AKEBrKUckW0KREUWRnvT')
-////  .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-//  .then(data => document.getElementById('content').innerHTML = data.tempo)
-//  .catch(error => console.error(error));
-//
-// function postData(url = ''){
-//   return fetch(url, {
-//     headers: {
-//       'Authorization': 'Bearer BQCKyRsLzOGGbWmDnz9L864u-IDkCZSV02KBWc0zhLqj_F0eu_5bezhyZLs22haUXmLV10hV-nv8SbZVcZxF0J6CP2HBd8RtOX7eTBQMqPUwpJ1VfkbRZ6Ylx4yqg1igX0VCtapT-8P6WIQKwNnqsiEcAwk83EIhm6pxEjlx-k-WyVj_27boyV429IACtAuK9XcFSQ'
-//     },
-//     body: JSON.stringify()
-//   })
-//     .then(response => response.json());
-// }
-
 document.getElementById('send_btn').onclick = search; // This gets the id of the submit button and onclick will run the function search()
+
+function Switch(type){
+
+	document.getElementById('searchDropdown').innerText = type;
+	change();
+
+}
 
 function search(evt){
 
 	evt.preventDefault();
 	var search = document.getElementById('txt_field').value; // This gets the value of the search bar
+	var type = document.getElementById('searchDropdown').innerText.toLowerCase();
+	var type2 = type.substring(0, type.length-1);
 
 	fetch('/search', {
-		headers: {text: search}
+		headers: {text: search, Type: type2}
 	})
 	// I found this example to create a table from this website
 	// https://www.encodedna.com/javascript/populate-json-data-to-html-table-using-javascript.htm
 		.then(response => response.json())
 		.then(function(data) {
 
-			var table = document.createElement('table');
+			if (data.error){
 
-			for (var i = 0; i < data.tracks.items.length; i++){
-
-				var tr = table.insertRow(-1);
-
-				var tabCell = tr.insertCell(-1);
-				tabCell.innerHTML = data.tracks.items[i].name;
-
-				var tabCell2 = tr.insertCell(-1);
-				tabCell2.innerHTML = data.tracks.items[i].album.artists[0].name;
-
-				var tabCell3 = tr.insertCell(-1);
-				tabCell3.innerHTML = data.tracks.items[i].album.name;
+				console.log(data);
+				document.getElementById('content').innerHTML = 'Error 500, internal server error, try again';
+				return null;
 
 			}
+			var table = document.createElement('table');
 
-			var divContainer = document.getElementById('content');
-			divContainer.innerHTML = '';
-			divContainer.appendChild(table);
+			if (type == 'albums'){
+
+				for (var i = 0; i < data[type].items.length; i++){
+
+					var tr = table.insertRow(-1);
+
+					var tabCell = tr.insertCell(-1);
+					tabCell.innerHTML = data[type].items[i].name;
+
+					var tabCell2 = tr.insertCell(-1);
+					tabCell2.innerHTML = data[type].items[i].artists[0].name;
+
+					// var tabCell3 = tr.insertCell(-1);
+					// tabCell3.innerHTML = data[type].items[i].album.name;
+
+				}
+
+				var divContainer = document.getElementById('content');
+				divContainer.innerHTML = '';
+				divContainer.appendChild(table);
+
+			} else if (type == 'artists') {
+
+				for (var i = 0; i < data[type].items.length; i++){
+
+					var tr = table.insertRow(-1);
+
+					var tabCell = tr.insertCell(-1);
+					tabCell.innerHTML = data[type].items[i].name;
+
+					var tabCell2 = tr.insertCell(-1);
+					tabCell2.innerHTML = data[type].items[i].genres;
+
+					try {
+
+						var tabCell3 = tr.insertCell(-1);
+						tabCell3.innerHTML = '<img src='+data[type].items[i].images[0].url+' height="128px">';
+
+					} catch(err) {
+
+						null;
+
+					}
+
+				}
+
+				var divContainer = document.getElementById('content');
+				divContainer.innerHTML = '';
+				divContainer.appendChild(table);
+
+			} else {
+
+				for (var i = 0; i < data[type].items.length; i++){
+
+					var tr = table.insertRow(-1);
+
+					var tabCell = tr.insertCell(-1);
+					tabCell.innerHTML = data[type].items[i].name;
+
+					var tabCell2 = tr.insertCell(-1);
+					tabCell2.innerHTML = data[type].items[i].album.artists[0].name;
+
+					var tabCell3 = tr.insertCell(-1);
+					tabCell3.innerHTML = data[type].items[i].album.name;
+
+				}
+
+				var divContainer = document.getElementById('content');
+				divContainer.innerHTML = '';
+				divContainer.appendChild(table);
+
+			}
+			document.getElementsByTagName('table')[0].setAttribute('cellpadding', '10');
+			document.getElementsByTagName('table')[0].setAttribute('class', 'text-white');
 
 		})
 		.catch(error => console.error(error));
 
 }
 
-fetch('/details')
-	.then(response => response.json())
-	.then(function(data){
+function change(){
 
-		// data = data.json();
-		if (data.display_name) {
+	var elements = ['Tracks', 'Artists', 'Albums'];
+	var current = document.getElementById('searchDropdown').innerText;
+	for (var i = 0; i < elements.length; i++){
 
-			document.getElementById('navbarDropdown').innerHTML = 'Signed in as ' + data.display_name;
-			document.getElementById('visitProfile').href = data.link;
-			$('#login').hide();
-			$('#loggedin').show();
+		$('#'+elements[i]).css('display', 'block');
 
-		}
-		else {
+	}
+	$('#'+current).hide();
 
-			console.log(data);
-			$('#login').show();
-			$('#loggedin').hide();
+}
 
-		}
+document.addEventListener('DOMContentLoaded', function(){
 
-	});
+	Switch('Tracks');
+
+	fetch('/details')
+		.then(response => response.json())
+		.then(function(data){
+
+			// data = data.json();
+			if (data.display_name) {
+
+				document.getElementById('navbarDropdown').innerHTML = 'Signed in as ' + data.display_name;
+				document.getElementById('visitProfile').href = data.link;
+				$('#login').hide();
+				$('#loggedin').show();
+
+			}
+			else {
+
+				// console.log(data);
+				$('#login').show();
+				$('#loggedin').hide();
+
+			}
+
+		});
+
+});
