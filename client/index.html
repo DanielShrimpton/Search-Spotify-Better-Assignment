@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
 
     <style type="text/css">
-      #login, #loggedin {
+      #login, #loggedin, #Tracks, #Artists, #Albums {
         display: none;
       }
       .text-overflow {
@@ -17,11 +17,40 @@
         white-space: nowrap;
         width: 500px;
       }
-      td {
+      table{
+        border-collapse: separate;
+        border-spacing: 0px 1px;
+        
+      }
+      td{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 50ch;
+        max-width: 75ch;
+        background-color: #28a745;
+      }
+      tr td:first-child {
+        -moz-border-radius-topleft: 10px;
+        -moz-border-radius-bottomleft: 10px;
+        -webkit-border-top-left-radius: 10px;
+        -webkit-border-bottom-left-radius: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 75ch;
+        background-color: #28a745;
+      }
+
+      tr td:last-child {
+        -moz-border-radius-topright: 10px;
+        -moz-border-radius-bottomright: 10px;
+        -webkit-border-top-right-radius: 10px;
+        -webkit-border-bottom-right-radius: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 75ch;
+        background-color: #28a745;
       }
       body {
         padding-top: 80px;
@@ -70,6 +99,14 @@
           </div>
           <div class="col-sm-7">
             <form class="form-inline my-2 my-lg-0">
+                <a style="color:white" class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tracks
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="searchDropdown">
+                    <a class="dropdown-item" onclick="Switch('Tracks')" id="Tracks">Tracks</a>
+                    <a class="dropdown-item" onclick="Switch('Artists')" id="Artists">Artists</a>
+                    <a class="dropdown-item" onclick="Switch('Albums')" id="Albums">Albums</a>
+                  </div>
               <input id="txt_field" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width:65%;">
               <button id="send_btn" class="btn btn-outline-secondary my-2 my-sm-0"><img src="./images/search.png" width="30"></button>
             </form>
