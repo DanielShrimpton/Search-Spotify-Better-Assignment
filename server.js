@@ -21,6 +21,8 @@ app.get('/logout', function(req, res) {
 	process.env.ACCESS_TOKEN = '';
 	process.env.REFRESH_TOKEN = '';
 	process.env.USER = '';
+	process.env.LINK = '';
+	process.env.MARKET = '';
 	res.clearCookie();
 	res.redirect('/');
 
@@ -29,14 +31,17 @@ app.get('/logout', function(req, res) {
 
 app.get('/details', function(req, res) {
 
-	res.send({display_name: process.env.USER});
+	res.send({
+		display_name: process.env.USER,
+		link: process.env.LINK
+	});
 
 });
 
 app.get('/search', function(req, res){
 
 	var text = req.get('text');
-	var url = 'https://api.spotify.com/v1/search?q=name:'+text+'&type=track';
+	var url = 'https://api.spotify.com/v1/search?q=name:'+text+'&type=track&limit=50&market='+process.env.MARKET;
 	var content = httpGet(url);
 	res.send(content);
 
@@ -152,6 +157,8 @@ app.get('/callback', function(req, res) {
 
 					console.log(body);  // where body is info like Username, product e.g. premium, country etc.
 					process.env.USER = body.display_name; // Another environment variable for server to use
+					process.env.MARKET = body.country;
+					process.env.LINK = body.external_urls.spotify;
 
 				});
 
