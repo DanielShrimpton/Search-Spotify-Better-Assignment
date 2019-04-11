@@ -18,7 +18,7 @@
         width: 500px;
       }
       body {
-        padding-top: 60px;
+        padding-top: 80px;
       }
     </style>
 
@@ -65,34 +65,31 @@
           <div class="col-sm-7">
             <form class="form-inline my-2 my-lg-0">
               <input id="txt_field" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width:65%;">
-              <button id="send_btn" class="btn btn-outline-secondary my-2 my-sm-0" onclick="submit();"><img src="./images/search.png" width="30"></button>
+              <button id="send_btn" class="btn btn-outline-secondary my-2 my-sm-0"><img src="./images/search.png" width="30"></button>
             </form>
           </div>
-          <div class="col-sm-1" id="login">
+          <div class="col-sm-2" id="login">
             <a style="color:white" href="/login" class="btn btn-primary ml-sm-2">Login</a>
           </div>
           <div class="col-sm-2" id="loggedin">
-            <a style="color:white" id="u_name"></a>
-            <!-- <a class="btn btn-primary" id="obtain-new-token">Obtain new token</a> -->
-            <a href="/logout" class="btn btn-primary ml-sm-2">Logout</a>
+            <a style="color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Signed in as 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#" id="visitProfile" target="_blank">Visit profile</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
           </div>
         </div>
       </nav>
     </header>
-
-    <div class="container">
-      <div id="loggedin">
-        <div id="user-profile">
-        </div>
-        <div id="oauth">
-        </div>
-        <button class="btn btn-default" id="obtain-new-token">Obtain new token</button>
-      </div>
+    <div class="d-flex justify-content-center">
+      <div id="content" class="col-sm-8"></div>
     </div>
-
+    
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
-    <div id="content"></div>
 
     <script src="client.js"></script>
 
