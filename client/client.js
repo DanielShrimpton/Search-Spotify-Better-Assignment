@@ -1,9 +1,3 @@
-//window.addEventListener('click', function(event){
-//  fetch('http://127.0.0.1:8090/list')
-//  .then(response => response.text())
-//  .then(body => document.getElementById('content').innerHTML=body)
-//});
-
 //postData('https://api.spotify.com/v1/audio-features/06AKEBrKUckW0KREUWRnvT')
 ////  .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
 //  .then(data => document.getElementById('content').innerHTML = data.tempo)
@@ -21,11 +15,11 @@
 
 document.getElementById('send_btn').onclick = search; // This gets the id of the submit button and onclick will run the function search()
 
-function search(){
+function search(evt){
 
+	evt.preventDefault();
 	var search = document.getElementById('txt_field').value; // This gets the value of the search bar
 
-	// submit() // This runs a function which returns an API request for songs with the title of the search bar
 	fetch('/search', {
 		headers: {text: search}
 	})
@@ -34,7 +28,6 @@ function search(){
 		.then(response => response.json())
 		.then(function(data) {
 
-			console.log(data);
 			var table = document.createElement('table');
 
 			for (var i = 0; i < data.tracks.items.length; i++){
@@ -44,11 +37,11 @@ function search(){
 				var tabCell = tr.insertCell(-1);
 				tabCell.innerHTML = data.tracks.items[i].name;
 
-				// var tabCell = tr.insertCell(-1);
-				tabCell.innerHTML = data.tracks.items[i].album.artists[0].name;
+				var tabCell2 = tr.insertCell(-1);
+				tabCell2.innerHTML = data.tracks.items[i].album.artists[0].name;
 
-				// var tabCell = tr.insertCell(-1);
-				tabCell.innerHTML = data.tracks.items[i].album.name;
+				var tabCell3 = tr.insertCell(-1);
+				tabCell3.innerHTML = data.tracks.items[i].album.name;
 
 			}
 
@@ -68,7 +61,8 @@ fetch('/details')
 		// data = data.json();
 		if (data.display_name) {
 
-			document.getElementById('u_name').innerHTML = 'Signed in as ' + data.display_name;
+			document.getElementById('navbarDropdown').innerHTML = 'Signed in as ' + data.display_name;
+			document.getElementById('visitProfile').href = data.link;
 			$('#login').hide();
 			$('#loggedin').show();
 
