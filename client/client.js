@@ -60,7 +60,7 @@ function search(evt){
 
 				for (var i = 0; i < data[type].items.length; i++){
 
-					var tr = tbody.insertRow(-1);
+					tr = tbody.insertRow(-1);
 
 					var tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
@@ -80,22 +80,22 @@ function search(evt){
 
 			} else if (type == 'artists') {
 
-				var tr = thead.insertRow(-1);
-				var cell = tr.insertCell(-1);
+				tr = thead.insertRow(-1);
+				cell = tr.insertCell(-1);
 				cell.innerHTML = 'Artist';
 				cell = tr.insertCell(-1);
 				cell.innerHTML = 'Genres';
 				cell = tr.insertCell(-1);
 				cell.innerHTML = 'Artist Art';
 
-				for (var i = 0; i < data[type].items.length; i++){
+				for (i = 0; i < data[type].items.length; i++){
 
-					var tr = tbody.insertRow(-1);
+					tr = tbody.insertRow(-1);
 
-					var tabCell = tr.insertCell(-1);
+					tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
 
-					var tabCell2 = tr.insertCell(-1);
+					tabCell2 = tr.insertCell(-1);
 					tabCell2.innerHTML = data[type].items[i].genres;
 
 					try {
@@ -111,37 +111,37 @@ function search(evt){
 
 				}
 
-				var divContainer = document.getElementById('content');
+				divContainer = document.getElementById('content');
 				divContainer.innerHTML = '';
 				divContainer.appendChild(thead);
 				divContainer.appendChild(tbody);
 
 			} else {
 
-				var tr = thead.insertRow(-1);
-				var cell = tr.insertCell(-1);
+				tr = thead.insertRow(-1);
+				cell = tr.insertCell(-1);
 				cell.innerHTML = 'Track';
 				cell = tr.insertCell(-1);
 				cell.innerHTML = 'Artist';
 				cell = tr.insertCell(-1);
 				cell.innerHTML = 'Album';
 
-				for (var i = 0; i < data[type].items.length; i++){
+				for (i = 0; i < data[type].items.length; i++){
 
-					var tr = tbody.insertRow(-1);
+					tr = tbody.insertRow(-1);
 
-					var tabCell = tr.insertCell(-1);
+					tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
 
-					var tabCell2 = tr.insertCell(-1);
+					tabCell2 = tr.insertCell(-1);
 					tabCell2.innerHTML = data[type].items[i].album.artists[0].name;
 
-					var tabCell3 = tr.insertCell(-1);
+					tabCell3 = tr.insertCell(-1);
 					tabCell3.innerHTML = data[type].items[i].album.name;
 
 				}
 
-				var divContainer = document.getElementById('content');
+				divContainer = document.getElementById('content');
 				divContainer.innerHTML = '';
 				divContainer.appendChild(thead);
 				divContainer.appendChild(tbody);
