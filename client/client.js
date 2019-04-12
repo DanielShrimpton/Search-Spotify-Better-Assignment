@@ -24,18 +24,43 @@ function search(evt){
 
 			if (data.error){
 
-				console.log(data);
-				document.getElementById('content').innerHTML = 'Error 500, internal server error, try again';
+				console.log(data.error);
+				if (data.error.status == 401){
+
+					document.getElementById('content').innerHTML = '';
+					document.getElementById('content').innerHTML = '<h3>Please log in</h3>';
+
+				} else {
+
+					document.getElementById('content').innerHTML = '';
+					document.getElementById('content').innerHTML = data.error;
+
+				}
 				return null;
 
 			}
-			var table = document.createElement('table');
+
+			if (data[type].items.length == 0){
+
+				document.getElementById('content').innerHTML = '<h3>Sorry no results found, please try another search</h3>';
+				return null;
+
+			}
+
+			var tbody = document.createElement('tbody');
+			var thead = document.createElement('thead');
 
 			if (type == 'albums'){
 
+				var tr = thead.insertRow(-1);
+				var cell = tr.insertCell(-1);
+				cell.innerHTML = 'Album Name';
+				cell = tr.insertCell(-1);
+				cell.innerHTML = 'Artist';
+
 				for (var i = 0; i < data[type].items.length; i++){
 
-					var tr = table.insertRow(-1);
+					var tr = tbody.insertRow(-1);
 
 					var tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
@@ -50,13 +75,22 @@ function search(evt){
 
 				var divContainer = document.getElementById('content');
 				divContainer.innerHTML = '';
-				divContainer.appendChild(table);
+				divContainer.appendChild(thead);
+				divContainer.appendChild(tbody);
 
 			} else if (type == 'artists') {
 
+				var tr = thead.insertRow(-1);
+				var cell = tr.insertCell(-1);
+				cell.innerHTML = 'Artist';
+				cell = tr.insertCell(-1);
+				cell.innerHTML = 'Genres';
+				cell = tr.insertCell(-1);
+				cell.innerHTML = 'Artist Art';
+
 				for (var i = 0; i < data[type].items.length; i++){
 
-					var tr = table.insertRow(-1);
+					var tr = tbody.insertRow(-1);
 
 					var tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
@@ -79,13 +113,22 @@ function search(evt){
 
 				var divContainer = document.getElementById('content');
 				divContainer.innerHTML = '';
-				divContainer.appendChild(table);
+				divContainer.appendChild(thead);
+				divContainer.appendChild(tbody);
 
 			} else {
 
+				var tr = thead.insertRow(-1);
+				var cell = tr.insertCell(-1);
+				cell.innerHTML = 'Track';
+				cell = tr.insertCell(-1);
+				cell.innerHTML = 'Artist';
+				cell = tr.insertCell(-1);
+				cell.innerHTML = 'Album';
+
 				for (var i = 0; i < data[type].items.length; i++){
 
-					var tr = table.insertRow(-1);
+					var tr = tbody.insertRow(-1);
 
 					var tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
@@ -100,11 +143,10 @@ function search(evt){
 
 				var divContainer = document.getElementById('content');
 				divContainer.innerHTML = '';
-				divContainer.appendChild(table);
+				divContainer.appendChild(thead);
+				divContainer.appendChild(tbody);
 
 			}
-			document.getElementsByTagName('table')[0].setAttribute('cellpadding', '10');
-			document.getElementsByTagName('table')[0].setAttribute('class', 'text-white');
 
 		})
 		.catch(error => console.error(error));
