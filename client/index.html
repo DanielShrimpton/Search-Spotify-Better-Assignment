@@ -17,19 +17,25 @@
         white-space: nowrap;
         width: 500px;
       }
-      table{
+      .table{
+        width: 60%;
         border-collapse: separate;
         border-spacing: 0px 1px;
+        /* background-color: #FFF; */
         
       }
-      td{
+      .table tr{
+        background-color: #212529;
+      }
+      .table td{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 75ch;
-        background-color: #28a745;
+        color: #FFF;
+        /* background-color: #212529; */
       }
-      tr td:first-child {
+      .table tr td:first-child {
         -moz-border-radius-topleft: 10px;
         -moz-border-radius-bottomleft: 10px;
         -webkit-border-top-left-radius: 10px;
@@ -38,10 +44,14 @@
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 75ch;
-        background-color: #28a745;
       }
 
-      tr td:last-child {
+      .table thead tr td{
+        background-color: #f2f2f2;
+        color: #000;
+      }
+
+      .table tr td:last-child {
         -moz-border-radius-topright: 10px;
         -moz-border-radius-bottomright: 10px;
         -webkit-border-top-right-radius: 10px;
@@ -50,10 +60,13 @@
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 75ch;
-        background-color: #28a745;
+      }
+      .table tr:hover{
+        background-color: #b9bbbe;
       }
       body {
         padding-top: 80px;
+        padding-bottom: 40px;
       }
     </style>
 
@@ -129,7 +142,9 @@
       </nav>
     </header>
     <div class="d-flex justify-content-center">
-      <div id="content"></div>
+      <div>
+        <table id="content" class="table"></table>
+      </div>
     </div>
     
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
