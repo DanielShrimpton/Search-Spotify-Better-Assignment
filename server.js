@@ -64,7 +64,8 @@ function httpGet(url){
 var client_id = '8f456770a0c5460eaff16e6476344bc5';
 var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
 // var redirect_uri = 'http://127.0.0.1:8090/callback';
-var redirect_uri = 'http://localhost:8090/callback';
+// var redirect_uri = 'http://localhost:8090/callback';
+var redirect_uri = 'https://search-spotify-better.herokuapp.com/callback';
 
 // SPOTIFY FUNCTION
 
@@ -214,4 +215,5 @@ app.get('/refresh_token', function(req) {
 
 });
 
-app.listen(8090);
+// app.listen(8090);
+app.listen(process.env.PORT || 8090);
