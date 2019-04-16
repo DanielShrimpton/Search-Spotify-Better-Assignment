@@ -31,7 +31,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 75ch;
+        max-width: 30ch;
         color: #FFF;
         /* background-color: #212529; */
       }
@@ -45,7 +45,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 75ch;
+        /* max-width: 75ch; */
       }
 
       .table thead tr td{
@@ -63,7 +63,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 75ch;
+        /* max-width: 75ch; */
       }
       .table tr:hover{
         background-color: #b9bbbe;
@@ -71,6 +71,11 @@
       body {
         padding-top: 80px;
         padding-bottom: 40px;
+      }
+      .center {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
       }
     </style>
 
@@ -145,9 +150,10 @@
         </div>
       </nav>
     </header>
-    <div class="d-flex justify-content-center">
+    <!-- <div class="d-flex justify-content-center" style="width: 80%"> -->
+    <div class="center">
       <div>
-        <table id="content" class="table"></table>
+        <table id="content" class="table" style="width: 100%"></table>
       </div>
     </div>
     
