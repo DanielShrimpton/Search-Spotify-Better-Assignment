@@ -25,15 +25,17 @@ function search(evt){
 			if (data.error){
 
 				console.log(data.error);
-				if (data.error.status == 401){
+				if (data.error.status == 401 || data.error.status == 400){
 
+					$('#login').show();
+					$('#loggedin').hide();
 					document.getElementById('content').innerHTML = '';
 					document.getElementById('content').innerHTML = '<h3>Please log in</h3>';
 
 				} else {
 
 					document.getElementById('content').innerHTML = '';
-					document.getElementById('content').innerHTML = data.error;
+					document.getElementById('content').innerHTML = data.error.status + ' ' + data.error.message;
 
 				}
 				return null;
@@ -61,6 +63,8 @@ function search(evt){
 				for (var i = 0; i < data[type].items.length; i++){
 
 					tr = tbody.insertRow(-1);
+					tr.setAttribute('class', 'clickable-row');
+					tr.setAttribute('data-href', data[type].items[i].external_urls.spotify);
 
 					var tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
@@ -91,6 +95,8 @@ function search(evt){
 				for (i = 0; i < data[type].items.length; i++){
 
 					tr = tbody.insertRow(-1);
+					tr.setAttribute('class', 'clickable-row');
+					tr.setAttribute('data-href', data[type].items[i].external_urls.spotify);
 
 					tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
@@ -129,6 +135,8 @@ function search(evt){
 				for (i = 0; i < data[type].items.length; i++){
 
 					tr = tbody.insertRow(-1);
+					tr.setAttribute('class', 'clickable-row');
+					tr.setAttribute('data-href', data[type].items[i].external_urls.spotify);
 
 					tabCell = tr.insertCell(-1);
 					tabCell.innerHTML = data[type].items[i].name;
@@ -147,6 +155,16 @@ function search(evt){
 				divContainer.appendChild(tbody);
 
 			}
+
+			jQuery(document).ready(function($) {
+
+				$('.clickable-row').click(function() {
+
+					window.open($(this).data('href'), '_blank');
+
+				});
+
+			});
 
 		})
 		.catch(error => console.error(error));
