@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 require('dotenv').config;
 
+// NEED TO USE COOKIES TO SET INDIVIDUAL SESSIONS FOR MULTIPLE USERS...
+
 
 var app = express();
 
