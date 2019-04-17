@@ -27,10 +27,19 @@ function search(evt){
 				console.log(data.error);
 				if (data.error.status == 401 || data.error.status == 400){
 
-					$('#login').show();
-					$('#loggedin').hide();
-					document.getElementById('content').innerHTML = '';
-					document.getElementById('content').innerHTML = '<h3>Please log in</h3>';
+					if (data.error.message == 'No search query') {
+
+						document.getElementById('content').innerHTML = '';
+						document.getElementById('content').innerHTML = '<h3>Please enter a search term</h3>';
+
+					} else {
+
+						$('#login').show();
+						$('#loggedin').hide();
+						document.getElementById('content').innerHTML = '';
+						document.getElementById('content').innerHTML = '<h3>Please log in</h3>';
+
+					}
 
 				} else {
 
