@@ -22,6 +22,21 @@
         "linebreak-style": ["error", "unix"],
         "no-console": "off",
         "padded-blocks": "error",
-        "no-trailing-spaces": "error"
+        "no-trailing-spaces": "error",
+        "valid-jsdoc": [2, {
+            "requireReturn": false,
+            "prefer": {
+                "return": "returns"
+            }
+        }],
+        "require-jsdoc": ["error", {
+            "require": {
+                "FunctionDeclaration": true,
+                "MethodDefinition": false,
+                "ClassDeclaration": false,
+                "ArrowFunctionExpression": true,
+                "FunctionExpression": true
+            }
+        }]
     }
 }
