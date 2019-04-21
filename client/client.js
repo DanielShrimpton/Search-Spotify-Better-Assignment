@@ -1,5 +1,9 @@
 document.getElementById('send_btn').onclick = search; // This gets the id of the submit button and onclick will run the function search()
 
+/**
+ * Changes the inner HTML of the dropdown to the selected type and then runs change()
+ * @param {String} type The type to change to
+ */
 function Switch(type){
 
 	document.getElementById('searchDropdown').innerText = type;
@@ -7,6 +11,11 @@ function Switch(type){
 
 }
 
+/**
+ * Function that is called when the search button is pressed. It uses evt.preventDefault to stop an
+ * automatic redirect and then will fetch the search results from the server at '/fetch' and then dynamically update the HTML according to the result.
+ * @param {*} evt An event
+ */
 function search(evt){
 
 	evt.preventDefault();
@@ -180,6 +189,10 @@ function search(evt){
 
 }
 
+/**
+ * A function that goes through each option for the dropdown, makes them visible and then hides the current
+ * selection so the appropriate ones are visible to choose from with no duplicates
+ */
 function change(){
 
 	var elements = ['Tracks', 'Artists', 'Albums'];
