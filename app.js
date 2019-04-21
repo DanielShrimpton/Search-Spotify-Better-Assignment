@@ -216,3 +216,5 @@ app.get('/refresh_token', function(req) {
 	});
 
 });
+
+module.exports = app;
