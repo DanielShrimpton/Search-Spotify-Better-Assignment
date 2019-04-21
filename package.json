@@ -7,7 +7,7 @@
     "test": "jest",
     "start_old": "nodemon server.js",
     "start": "node server.js",
-    "pretest": "eslint client/client.js server.js"
+    "pretest": "eslint client/client.js app.js server.js"
   },
   "repository": {
     "type": "git",
