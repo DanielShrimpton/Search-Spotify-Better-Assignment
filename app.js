@@ -4,18 +4,151 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+var uuid = require('uuid/v4');
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+var bodyParser = require('body-parser');
+var passport = require('passport');
+var SpotifyStrategy = require('passport-spotify').Strategy;
 require('dotenv').config;
 
 // NEED TO USE COOKIES TO SET INDIVIDUAL SESSIONS FOR MULTIPLE USERS...
 
+var client_id = '8f456770a0c5460eaff16e6476344bc5';
+var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
+// var redirect_uri = 'http://127.0.0.1:8090/callback';
+// var redirect_uri = 'http://localhost:8090/callback';
+// var redirect_uri = 'https://search-spotify-better.herokuapp.com/callback';
+var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
 
 var app = express();
+
+passport.serializeUser(function(user, done){
+
+	done(null, user);
+
+});
+
+passport.deserializeUser(function(obj, done){
+
+	done(null, obj);
+
+});
+
+passport.use(
+	new SpotifyStrategy({
+		clientID: client_id,
+		clientSecret: client_secret,
+		callbackURL: redirect_uri
+	},
+	function(accessToken, refreshToken, expires_in, profile, done) {
+
+		process.nextTick(function(){
+
+			console.log('\nPASSPORT THINGY, PROFILE DATA:\n');
+			console.log(profile);
+			return done(null, profile);
+
+		});
+
+		// User.Create({ spotifyId: profile.id }, function(err, user) {
+
+		// 	if (err) {
+
+		// 		return done(err);
+
+		// 	}
+
+		// 	console.log(user);
+
+		// 	if (!user) {
+
+		// 		user = new User({
+		// 			name: profile.display_name,
+		// 			email: profile.email,
+		// 			username: profile.username,
+		// 			provider: 'Spotify',
+		// 			spotify: profile._json
+		// 		});
+		// 		user.save(function(err) {
+
+		// 			if (err) console.log(err);
+		// 			return done(err, user);
+
+		// 		});
+
+		// 	} else {
+
+		// 		return done(err, user);
+
+		// 	}
+
+		// });
+
+	})
+);
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(session({
+	// genid: (req) => {
+
+	// 	console.log('Inside the session middleware');
+	// 	console.log(req.sessionID);
+	// 	return uuid();
+
+	// },
+	store: new FileStore(),
+	secret: 'keyboard cat',
+	resave: false,
+	saveUninitialized: true
+
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/spotify', passport.authenticate('spotify', {
+	scope: ['user-read-email', 'user-read-private'], showDialog: true
+}), function(req, res) {
+	// this function won't be run
+});
+
+app.get('/auth/spotify/callback', passport.authenticate('spotify', {failureRedirect: '/'}), function(req, res) {
+
+	res.redirect('/');
+
+});
+
+// app.get('/', (req, res) => {
+
+// 	console.log('Inside the homepage callback function');
+// 	console.log(req.sessionID);
+// 	res.send('\nHit home page!\n');
+
+// });
+
 
 app.use(express.static('client'))
 	.use(cors())
 	.use(cookieParser());
 
 // ALL OF THE FEATURES FOR PAGE TO WORK
+
+app.get('/loginn', (req, res) => {
+
+	console.log('Inside GET /longin callback function');
+	console.log(req.sessionID);
+	res.send('\nYou posted to the login page!\n');
+
+});
+
+app.post('/loginn', (req, res) => {
+
+	console.log('Inside POST /login callback function');
+	console.log(req.body);
+	res.send('\nYou posted to the login page!\n');
+
+});
 
 
 app.get('/logout', function(req, res) {
@@ -63,11 +196,7 @@ function httpGet(url){
 
 // SPOTIFY AUTH FUNCTIONS FROM HERE ON
 
-var client_id = '8f456770a0c5460eaff16e6476344bc5';
-var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
-// var redirect_uri = 'http://127.0.0.1:8090/callback';
-var redirect_uri = 'http://localhost:8090/callback';
-// var redirect_uri = 'https://search-spotify-better.herokuapp.com/callback';
+
 
 // SPOTIFY FUNCTION
 
