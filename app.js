@@ -16,8 +16,8 @@ var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
 // var redirect_uri = 'http://127.0.0.1:8090/callback';
 // var redirect_uri = 'http://localhost:8090/callback';
 // var redirect_uri = 'https://search-spotify-better.herokuapp.com/callback';
-// var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
-var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
+var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
+// var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
 
 var app = express();
 
