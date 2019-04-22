@@ -249,18 +249,16 @@ document.addEventListener('DOMContentLoaded', function(){
 
 $(window).on('resize', function() {
 
-	if($(window).width() > 400) {
+	if($(window).width() > 600) {
 
 		$('#body').addClass('limit1200');
 		$('#body').removeClass('limit400');
-		document.getElementById('content').innerHTML = $(window).width();
 		console.log('Big screen');
 
 	} else {
 
 		$('#body').removeClass('limit1200');
 		$('#body').addClass('limit400');
-		document.getElementById('content').innerHTML = $(window).width();
 		console.log('small screen');
 
 	}
