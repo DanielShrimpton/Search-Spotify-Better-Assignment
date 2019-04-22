@@ -60,6 +60,13 @@ function search(evt){
 
 			}
 
+			if (data[type].items === undefined) {
+
+				fetch('/logout');
+				return null;
+
+			}
+
 			if (data[type].items.length == 0){
 
 				document.getElementById('content').innerHTML = '<h3>Sorry no results found, please try another search</h3>';
