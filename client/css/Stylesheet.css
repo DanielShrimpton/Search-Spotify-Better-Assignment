@@ -1,0 +1,132 @@
+#login, #loggedin, #Tracks, #Artists, #Albums {
+    display: none;
+  }
+
+  .text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 500px;
+  }
+
+  .table{
+    width: 60%;
+    border-collapse: separate;
+    border-spacing: 0px 1px;
+  }
+
+  .table tr{
+    background-color: #212529;
+  }
+
+  .table td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 30ch;
+    color: #FFF;
+  }
+
+  .table tr td:first-child {
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .table thead tr td{
+    background-color: #f2f2f2;
+    color: #000;
+  }
+
+  .table tr td:last-child {
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .table tr:hover{
+    background-color: #b9bbbe;
+  }
+
+  .tablem{
+    padding: 8px;
+    width: 60%;
+    border-collapse: separate;
+    border-spacing: 0px 1px;
+  }
+
+  .tablem tr{
+    background-color: #212529;
+  }
+
+  .tablem td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20ch;
+    color: #FFF;
+  }
+
+  .tablem tr td:first-child {
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tablem thead tr td{
+    background-color: #f2f2f2;
+    color: #000;
+  }
+
+  .tablem tr td:last-child {
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tablem tr:hover{
+    background-color: #b9bbbe;
+  }
+
+  body {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+  
+  .center {
+    margin: auto;
+    width: 90vw;
+    padding: 10px;
+  }
+
+  .limit1200 {
+    font-size: 16px
+  }
+
+  .limit400 {
+    font-size: 10px
+  }
