@@ -31,14 +31,6 @@ function search(evt){
 		.then(response => response.json())
 		.then(function(data) {
 
-			if (!data){
-
-				console.error('NO DATA RECIEVED, NEED TO LOG IN AGAIN');
-				fetch('/logout');
-				return null;
-
-			}
-
 			if (data.error){
 
 				console.log(data.error);
@@ -193,7 +185,12 @@ function search(evt){
 			});
 
 		})
-		.catch(error => console.error(error));
+		.catch(function(err){
+
+			console.error(err);
+			fetch('/logout');
+
+		});
 
 }
 
