@@ -137,7 +137,7 @@ app.get('/search', function(req, res){
 	catch (err) {
 
 		console.log(err);
-		res.error(err);
+		res.send(err);
 
 	}
 
