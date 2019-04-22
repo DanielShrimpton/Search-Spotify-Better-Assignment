@@ -60,7 +60,7 @@ function search(evt){
 
 			}
 
-			if (data[type].items === undefined) {
+			if (data[type] === undefined) {
 
 				fetch('/logout');
 				return null;
