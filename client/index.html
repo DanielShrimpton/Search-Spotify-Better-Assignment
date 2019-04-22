@@ -89,76 +89,58 @@
   <body>
     <header>
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" style="color:lightgrey">BPM Finder</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" style="color:lightgrey" href="/">BPM Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div class="col-sm-3">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
-              </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#"> Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li> -->
-            </ul>
-          </div>
-          <div class="col-sm-7">
-            <form class="form-inline my-2 my-lg-0">
-                <a style="color:white" class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tracks
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="searchDropdown">
-                    <a class="dropdown-item" onclick="Switch('Tracks')" id="Tracks">Tracks</a>
-                    <a class="dropdown-item" onclick="Switch('Artists')" id="Artists">Artists</a>
-                    <a class="dropdown-item" onclick="Switch('Albums')" id="Albums">Albums</a>
-                  </div>
-              <input id="txt_field" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width:65%;">
-              <button id="send_btn" class="btn btn-outline-secondary my-2 my-sm-0"><img src="./images/search.png" width="30"></button>
-            </form>
-          </div>
-          <div class="col-sm-2" id="login">
-            <!-- <a style="color:white" href="/login" class="btn btn-primary ml-sm-2">Login</a> -->
-            <a style="color:white" href="/auth/spotify" class="btn btn-primary ml-sm-2">Login</a>
-          </div>
-          <div class="col-sm-2" id="loggedin">
-            <a style="color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Signed in as 
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#" id="visitProfile" target="_blank">Visit profile</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/logout">Logout</a>
+          <form class="form-inline my-0 my-lg-0" style="width: 100%">
+            <div class="col-sm-9 col-lg-10">
+              <table style="width: 100%">
+                <tr>
+                  <td style="width: 10%">
+                    <a style="color:white" class="nav-link dropdown-toggle my-sm-0" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tracks
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="searchDropdown">
+                      <a class="dropdown-item" onclick="Switch('Tracks')" id="Tracks">Tracks</a>
+                      <a class="dropdown-item" onclick="Switch('Artists')" id="Artists">Artists</a>
+                      <a class="dropdown-item" onclick="Switch('Albums')" id="Albums">Albums</a>
+                    </div>
+                  </td>
+                  <td>
+                    <input id="txt_field" class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search" style="width:85%;">
+                    <button id="send_btn" class="btn btn-outline-secondary my-2 my-sm-0"><img src="./images/search.png" width="30"></button>
+                  </td>
+                </tr>
+              </table>
             </div>
-          </div>
+            <div class="col-sm-3 col-lg-2" id="login">
+              <!-- <a style="color:white" href="/login" class="btn btn-primary ml-sm-2">Login</a> -->
+              <a style="color:white" href="/auth/spotify" class="btn btn-primary ml-sm-2">Login</a>
+            </div>
+            <div class="col-sm-3 col-lg-2" id="loggedin">
+              <a style="color:white" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Signed in as 
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#" id="visitProfile" target="_blank">Visit profile</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </div>
+          </form>
         </div>
       </nav>
     </header>
-    <!-- <div class="d-flex justify-content-center" style="width: 80%"> -->
+
     <div class="center">
       <div>
         <table id="content" class="table" style="width: 100%"></table>
       </div>
     </div>
-    
-    <!-- <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
 
     <script src="jquery-3.4.0.min.js"></script>
     <script src="client.js"></script>
