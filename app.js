@@ -136,7 +136,7 @@ app.get('/search', function(req, res){
 	}
 	catch (err) {
 
-		console.log(err);
+		console.log({error: err});
 		res.send(err);
 
 	}
