@@ -253,12 +253,14 @@ $(window).on('resize', function() {
 
 		$('#body').addClass('limit1200');
 		$('#body').removeClass('limit400');
+		document.getElementById('content').innerHTML = $(window).width();
 		console.log('Big screen');
 
 	} else {
 
 		$('#body').removeClass('limit1200');
 		$('#body').addClass('limit400');
+		document.getElementById('content').innerHTML = $(window).width();
 		console.log('small screen');
 
 	}
