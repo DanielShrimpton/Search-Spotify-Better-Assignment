@@ -252,12 +252,16 @@ $(window).on('resize', function() {
 	if($(window).width() > 600) {
 
 		$('#body').addClass('limit1200');
+		$('#content').addClass('table');
+		$('#content').removeClass('tablem');
 		$('#body').removeClass('limit400');
 		console.log('Big screen');
 
 	} else {
 
 		$('#body').removeClass('limit1200');
+		$('#content').addClass('tablem');
+		$('#content').removeClass('table');
 		$('#body').addClass('limit400');
 		console.log('small screen');
 
