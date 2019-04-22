@@ -124,12 +124,23 @@ app.get('/details', ensureAuthenticated, function(req, res) {
 
 app.get('/search', function(req, res){
 
-	var accessToken = req.user.accessToken;
-	var market = req.user.user.country;
-	var text = req.get('text'),
-		type = req.get('Type');
-	var content = httpGet(text, type, market, accessToken);
-	res.send(content);
+	try {
+
+		var accessToken = req.user.accessToken;
+		var market = req.user.user.country;
+		var text = req.get('text'),
+			type = req.get('Type');
+		var content = httpGet(text, type, market, accessToken);
+		res.send(content);
+
+	}
+	catch (err) {
+
+		console.log(err);
+		res.error(err);
+
+	}
+
 
 });
 

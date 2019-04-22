@@ -185,7 +185,11 @@ function search(evt){
 			});
 
 		})
-		.catch(error => console.error(error));
+		.catch(function(err) {
+
+			console.error(err);
+
+		});
 
 }
 
