@@ -234,3 +234,21 @@ document.addEventListener('DOMContentLoaded', function(){
 		});
 
 });
+
+$(window).on('resize', function() {
+
+	if($(window).width() > 400) {
+
+		$('#body').addClass('limit1200');
+		$('#body').removeClass('limit400');
+		console.log('Big screen');
+
+	} else {
+
+		$('#body').removeClass('limit1200');
+		$('#body').addClass('limit400');
+		console.log('small screen');
+
+	}
+
+});
