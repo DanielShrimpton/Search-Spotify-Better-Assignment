@@ -28,7 +28,7 @@ function search(evt){
 	})
 	// I found this example to create a table from this website
 	// https://www.encodedna.com/javascript/populate-json-data-to-html-table-using-javascript.htm
-		// .then(response => response.json())
+		.then(response => response.json())
 		.then(function(data) {
 
 			console.log(data);
