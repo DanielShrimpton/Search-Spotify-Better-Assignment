@@ -31,6 +31,8 @@ function search(evt){
 		.then(response => response.json())
 		.then(function(data) {
 
+			console.log(data);
+
 			if (data.error){
 
 				console.log(data.error);
