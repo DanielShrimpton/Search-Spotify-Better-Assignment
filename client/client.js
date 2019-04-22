@@ -185,11 +185,7 @@ function search(evt){
 			});
 
 		})
-		.catch(function(err) {
-
-			console.error(err);
-
-		});
+		.catch(error => console.error(error));
 
 }
 
