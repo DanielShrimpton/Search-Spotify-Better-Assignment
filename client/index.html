@@ -11,30 +11,32 @@
       #login, #loggedin, #Tracks, #Artists, #Albums {
         display: none;
       }
+
       .text-overflow {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         width: 500px;
       }
+
       .table{
         width: 60%;
         border-collapse: separate;
         border-spacing: 0px 1px;
-        /* background-color: #FFF; */
-        
       }
+
       .table tr{
         background-color: #212529;
       }
+
       .table td{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 30ch;
         color: #FFF;
-        /* background-color: #212529; */
       }
+
       .table tr td:first-child {
         -moz-border-radius-topleft: 10px;
         -moz-border-radius-bottomleft: 10px;
@@ -45,7 +47,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        /* max-width: 75ch; */
       }
 
       .table thead tr td{
@@ -63,18 +64,20 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        /* max-width: 75ch; */
       }
+
       .table tr:hover{
         background-color: #b9bbbe;
       }
+
       body {
         padding-top: 80px;
         padding-bottom: 40px;
       }
+      
       .center {
         margin: auto;
-        width: 50%;
+        width: 80%;
         padding: 10px;
       }
     </style>
@@ -111,7 +114,7 @@
                   </td>
                   <td>
                     <input id="txt_field" class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search" style="width:85%;">
-                    <button id="send_btn" class="btn btn-outline-secondary my-2 my-sm-0"><img src="./images/search.png" width="30"></button>
+                    <button id="send_btn" class="btn btn-outline-secondary my-2 my-sm-0" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"><img src="./images/search.png" width="30"></button>
                   </td>
                 </tr>
               </table>
