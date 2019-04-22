@@ -60,18 +60,17 @@
     background-color: #b9bbbe;
   }
 
-  .tablem{
-    padding: 8px;
+  .table-sm{
     width: 60%;
     border-collapse: separate;
     border-spacing: 0px 1px;
   }
 
-  .tablem tr{
+  .table-sm tr{
     background-color: #212529;
   }
 
-  .tablem td{
+  .table-sm td{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -79,7 +78,7 @@
     color: #FFF;
   }
 
-  .tablem tr td:first-child {
+  .table-sm tr td:first-child {
     -moz-border-radius-topleft: 10px;
     -moz-border-radius-bottomleft: 10px;
     -webkit-border-top-left-radius: 10px;
@@ -91,12 +90,12 @@
     text-overflow: ellipsis;
   }
 
-  .tablem thead tr td{
+  .table-sm thead tr td{
     background-color: #f2f2f2;
     color: #000;
   }
 
-  .tablem tr td:last-child {
+  .table-sm tr td:last-child {
     -moz-border-radius-topright: 10px;
     -moz-border-radius-bottomright: 10px;
     -webkit-border-top-right-radius: 10px;
@@ -108,7 +107,7 @@
     text-overflow: ellipsis;
   }
 
-  .tablem tr:hover{
+  .table-sm tr:hover{
     background-color: #b9bbbe;
   }
 

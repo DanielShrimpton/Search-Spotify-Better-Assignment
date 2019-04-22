@@ -253,14 +253,14 @@ $(window).on('resize', function() {
 
 		$('#body').addClass('limit1200');
 		$('#content').addClass('table');
-		$('#content').removeClass('tablem');
+		$('#content').removeClass('table-sm');
 		$('#body').removeClass('limit400');
 		console.log('Big screen');
 
 	} else {
 
 		$('#body').removeClass('limit1200');
-		$('#content').addClass('tablem');
+		$('#content').addClass('table-sm');
 		$('#content').removeClass('table');
 		$('#body').addClass('limit400');
 		console.log('small screen');
