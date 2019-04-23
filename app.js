@@ -104,10 +104,11 @@ app.get('/logout', function(req, res) {
 		if (err){
 
 			console.error(err);
+			res.sendStatus(500);
 
 		}
 		console.log('Logged out');
-		res.redirect('/');
+		res.redirect(200, '/');
 
 	});
 
@@ -119,7 +120,7 @@ app.get('/details', function(req, res) {
 	// console.log(req.isAuthenticated());
 	if (req.isAuthenticated()) {
 
-		res.send({display_name: req.user.user._json.display_name, link: req.user.user._json.external_urls.spotify});
+		res.status(200).send({display_name: req.user.user._json.display_name, link: req.user.user._json.external_urls.spotify});
 
 	} else {
 
@@ -140,7 +141,7 @@ app.get('/search', function(req, res){
 		var text = req.get('text'),
 			type = req.get('Type');
 		var content = httpGet(text, type, market, accessToken);
-		res.send(content);
+		res.status(200).send(content);
 
 	}
 	catch (err) {
