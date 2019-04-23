@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1556055313943" clover="3.2.0">
-  <project timestamp="1556055313943" name="All files">
-    <metrics statements="56" coveredstatements="54" conditionals="4" coveredconditionals="3" methods="9" coveredmethods="9" elements="69" coveredelements="66" complexity="0" loc="56" ncloc="56" packages="1" files="1" classes="1"/>
+<coverage generated="1556057392681" clover="3.2.0">
+  <project timestamp="1556057392681" name="All files">
+    <metrics statements="56" coveredstatements="56" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9" elements="69" coveredelements="69" complexity="0" loc="56" ncloc="56" packages="1" files="1" classes="1"/>
     <file name="app.js" path="X:\C\Users\Dan\OneDrive - Durham University\Documents\ComSci\Programming\Assignment 2\app.js">
-      <metrics statements="56" coveredstatements="54" conditionals="4" coveredconditionals="3" methods="9" coveredmethods="9"/>
+      <metrics statements="56" coveredstatements="56" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9"/>
       <line num="1" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
@@ -15,7 +15,7 @@
       <line num="11" count="1" type="stmt"/>
       <line num="14" count="1" type="stmt"/>
       <line num="15" count="1" type="stmt"/>
-      <line num="20" count="1" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
       <line num="22" count="1" type="stmt"/>
       <line num="24" count="1" type="stmt"/>
       <line num="33" count="1" type="stmt"/>
@@ -34,9 +34,9 @@
       <line num="93" count="1" type="stmt"/>
       <line num="102" count="1" type="stmt"/>
       <line num="115" count="2" type="stmt"/>
-      <line num="117" count="1" type="cond" truecount="1" falsecount="1"/>
-      <line num="119" count="0" type="stmt"/>
-      <line num="120" count="0" type="stmt"/>
+      <line num="117" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="119" count="1" type="stmt"/>
+      <line num="120" count="1" type="stmt"/>
       <line num="123" count="1" type="stmt"/>
       <line num="124" count="1" type="stmt"/>
       <line num="138" count="4" type="cond" truecount="2" falsecount="0"/>

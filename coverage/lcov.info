@@ -16,7 +16,7 @@ FNDA:1,deserial
 FNDA:3,passUse
 FNDA:1,authCallback
 FNDA:2,logout
-FNDA:1,(anonymous_5)
+FNDA:2,(anonymous_5)
 FNDA:4,details
 FNDA:3,search
 FNDA:2,httpGet
@@ -31,7 +31,7 @@ DA:10,1
 DA:11,1
 DA:14,1
 DA:15,1
-DA:20,1
+DA:19,1
 DA:22,1
 DA:24,1
 DA:33,1
@@ -50,9 +50,9 @@ DA:92,1
 DA:93,1
 DA:102,1
 DA:115,2
-DA:117,1
-DA:119,0
-DA:120,0
+DA:117,2
+DA:119,1
+DA:120,1
 DA:123,1
 DA:124,1
 DA:138,4
@@ -77,11 +77,11 @@ DA:197,2
 DA:198,2
 DA:229,1
 LF:56
-LH:54
-BRDA:117,0,0,0
+LH:56
+BRDA:117,0,0,1
 BRDA:117,0,1,1
 BRDA:138,1,0,3
 BRDA:138,1,1,1
 BRF:4
-BRH:3
+BRH:4
 end_of_record
