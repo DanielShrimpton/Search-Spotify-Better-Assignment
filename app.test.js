@@ -24,6 +24,17 @@ describe('Test the Home page', () => {
 
 });
 
+describe('Test the /logout', () => {
+
+	test('GET /logout returns 302 to indicate it removed login session and redirected', () => {
+
+		return request(app)
+			.get('/logout')
+			.expect(302);
+
+	});
+
+});
 
 describe('Test the /details', () => {
 
@@ -32,18 +43,6 @@ describe('Test the /details', () => {
 		return request(app)
 			.get('/details')
 			.expect(204);
-
-	});
-
-});
-
-describe('Test the /logout', () => {
-
-	test('GET /logout returns 200 to indicate it removed login session', () => {
-
-		return request(app)
-			.get('/logout')
-			.expect(200);
 
 	});
 
