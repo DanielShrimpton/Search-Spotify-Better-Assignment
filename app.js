@@ -86,7 +86,7 @@ app.get('/auth/spotify', passport.authenticate('spotify', {
 
 app.get('/auth/spotify/callback', passport.authenticate('spotify', {failureRedirect: '/'}), function(req, res) {
 
-	res.redirect('/');
+	res.redirect(200, '/');
 
 });
 
@@ -146,8 +146,8 @@ app.get('/search', function(req, res){
 	}
 	catch (err) {
 
-		console.error(err);
-		res.send(err);
+		// console.error(err);
+		res.status(500).send(err);
 
 	}
 
