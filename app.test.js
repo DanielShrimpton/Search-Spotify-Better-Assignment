@@ -2,7 +2,13 @@
 
 const request = require('supertest');
 const ap = require('./app');
-const authCallback = ap.authCallback;
+const authCallback = ap.authCallback,
+	serial = ap.serial,
+	deserial = ap.deserial,
+	logout = ap.logout,
+	details = ap.details,
+	search = ap.search,
+	passUse = ap.passUse;
 const app = ap.app;
 
 
@@ -36,6 +42,17 @@ describe('Test the /logout', () => {
 
 	});
 
+	let req = {
+		session: { destroy: jest.fn()}
+	};
+
+	test('Test /logout error', async () => {
+
+		await logout(req, null);
+		expect(req.session.destroy.mock.calls.length).toEqual(1);
+
+	});
+
 });
 
 describe('Test the /details', () => {
@@ -48,6 +65,37 @@ describe('Test the /details', () => {
 
 	});
 
+	let req = {isAuthenticated: jest.fn( () => true), user: {
+		user: {
+			_json:{
+				display_name: 'TEST_NAME', external_urls: {
+					spotify: 'TEST_LINK'}
+			}
+		}
+	}};
+	let res = {status: jest.fn((inp) => inp), send: jest.fn((input) => input)};
+
+	test('Test /details with simulating some details returns 200', async () => {
+
+		await details(req, res);
+		expect(res.status.mock.results[0].value).toEqual(200);
+
+	});
+
+	test('Test /details with simulating some details returns "TEST_NAME"', async () => {
+
+		await details(req, res);
+		expect(res.send.mock.results[0].value['display_name']).toEqual('TEST_NAME');
+
+	});
+
+	test('Test /details with simulating some details returns "TEST_LINK"', async () => {
+
+		await details(req, res);
+		expect(res.send.mock.results[0].value['link']).toEqual('TEST_LINK');
+
+	});
+
 });
 
 describe('Test the /search', () => {
@@ -57,6 +105,36 @@ describe('Test the /search', () => {
 		return request(app)
 			.get('/search')
 			.expect(500);
+
+	});
+
+	let req = {user: {accessToken: 'TEST_TOKEN', user : {country: 'TEST_COUNTRY'}}, get: jest.fn((inp) => {
+
+		if (inp === 'text') {
+
+			return 'TEST_SEARCH';
+
+		} else if (inp === 'Type') {
+
+			return 'TEST_TYPE';
+
+		}
+
+	})};
+	let res = {status: jest.fn((inp) => inp), send: jest.fn((input) => input)};
+
+	test('Test search function with mocking authentication sends status 200 to show it has run getHttp()', async () => {
+
+		await search(req, res);
+		expect(res.status.mock.results[0].value).toEqual(200);
+
+	});
+
+	test('Test search function with mocking authentication sends the error from getHttp() with invalid access token', async () => {
+
+		await search(req, res);
+		expect(JSON.parse(res.send.mock.results[0].value).error.status).toEqual(401);
+		expect(JSON.parse(res.send.mock.results[0].value).error.message).toEqual('Invalid access token');
 
 	});
 
@@ -82,15 +160,71 @@ describe('Test the login workflow', () => {
 
 });
 
-test('Function Test?', async () => {
+// Got from https://stackoverflow.com/a/49143644
 
-	let res = {
-		redirect: jest.fn()
-	};
+describe('Test the authCallback function', () => {
 
-	// console.log(authCallback(null, res));
-	await authCallback(null, res);
-	expect(res.redirect.mock.calls.length).toEqual(1);
+	test('Expect the redirect to be called once', async () => {
+
+		let res = {
+			redirect: jest.fn()
+		};
+
+		// console.log(authCallback(null, res));
+		await authCallback(null, res);
+		expect(res.redirect.mock.calls.length).toEqual(1);
+
+	});
 
 });
 
+describe('Test the serial and deserial functions both work', () => {
+
+	let done = jest.fn();
+
+	test('Testing serial()', async () => {
+
+		await serial(null, done);
+		expect(done.mock.calls.length).toEqual(1);
+
+	});
+
+	test('Testing deserial()', async () => {
+
+		await deserial(null, done);
+		expect(done.mock.calls.length).toEqual(2);
+
+	});
+
+});
+
+describe('Test the passport.use function', () => {
+
+	let accessToken = 'TEST_ACCESS',
+		refreshToken = 'TEST_REFRESH',
+		expires_in = 'TEST_EXPIRES',
+		profile = {user: 'TEST'},
+		done = jest.fn((ignore, obj) => obj);
+
+	test('Test that user profile is TEST', async () => {
+
+		await passUse(accessToken, refreshToken, expires_in, profile, done);
+		expect(done.mock.results[0].value['user']['user']).toEqual('TEST');
+
+	});
+
+	test('Test that accessToken is as expected', async () => {
+
+		await passUse(accessToken, refreshToken, expires_in, profile, done);
+		expect(done.mock.results[0].value['accessToken']).toEqual('TEST_ACCESS');
+
+	});
+
+	test('Test that refreshToken is as expected', async () => {
+
+		await passUse(accessToken, refreshToken, expires_in, profile, done);
+		expect(done.mock.results[0].value['refreshToken']).toEqual('TEST_REFRESH');
+
+	});
+
+});
