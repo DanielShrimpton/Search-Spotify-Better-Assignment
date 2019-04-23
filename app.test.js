@@ -1,7 +1,9 @@
 'use strict';
 
 const request = require('supertest');
-const app = require('./app');
+const ap = require('./app');
+const authCallback = ap.authCallback;
+const app = ap.app;
 
 
 describe('Test the Home page', () => {
@@ -79,3 +81,16 @@ describe('Test the login workflow', () => {
 	});
 
 });
+
+test('Function Test?', async () => {
+
+	let res = {
+		redirect: jest.fn()
+	};
+
+	// console.log(authCallback(null, res));
+	await authCallback(null, res);
+	expect(res.redirect.mock.calls.length).toEqual(1);
+
+});
+
