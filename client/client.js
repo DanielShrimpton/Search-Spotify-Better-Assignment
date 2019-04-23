@@ -195,7 +195,14 @@ function search(evt){
 		.catch(function(err){
 
 			console.error(err);
-			fetch('/logout');
+			if (err.status === 500) {
+
+				$('#login').show();
+				$('#loggedin').hide();
+				document.getElementById('content').innerHTML = '';
+				document.getElementById('content').innerHTML = '<h3>Please log in</h3>';
+
+			}
 
 		});
 
