@@ -223,7 +223,19 @@ document.addEventListener('DOMContentLoaded', function(){
 	Switch('Tracks');
 
 	fetch('/details')
-		.then(response => response.json())
+		.then(function(response) {
+
+			if (response.status === 204) {
+
+				return {display_name: false, link: false};
+
+			} else {
+
+				return response.json();
+
+			}
+
+		})
 		.then(function(data){
 
 			// data = data.json();
@@ -243,7 +255,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			}
 
-		});
+		})
+		.catch(err => console.error(err));
 
 });
 
