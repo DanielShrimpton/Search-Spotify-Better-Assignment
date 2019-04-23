@@ -25,55 +25,26 @@ describe('Test the Home page', () => {
 });
 
 
-describe('Test the /details section', () => {
+describe('Test the /details', () => {
 
-	test('GET /details succeeds', () => {
-
-		return request(app)
-			.get('/details')
-			.expect(200);
-
-	});
-
-	test('GET /details return JSON', () => {
+	test('GET /details returns 204 as no auth', () => {
 
 		return request(app)
 			.get('/details')
-			.expect('Content-type', /json/);
-
-	});
-
-	test('GET /details includes details', () => {
-
-		return request(app)
-			.get('/details')
-			.expect(checkContent);
+			.expect(204);
 
 	});
 
 });
 
-/**
- * @param {*} res idk
- */
-function checkContent(res) {
+describe('Test the /logout', () => {
 
-	const jContent = res.body;
-	if (typeof jContent !== 'object') {
+	test('GET /logout returns 200 to indicate it removed login session', () => {
 
-		throw new Error('not an object');
+		return request(app)
+			.get('/logout')
+			.expect(200);
 
-	}
-	if (jContent['display_name']) {
+	});
 
-		console.log(jContent['display_name']);
-
-	} else {
-
-		console.log(jContent['display_name']);
-		throw new Error('display_name should be the user');
-
-	}
-
-
-}
+});
