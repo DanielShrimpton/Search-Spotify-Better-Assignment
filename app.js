@@ -78,26 +78,33 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/spotify', passport.authenticate('spotify', {
-	scope: ['user-read-email', 'user-read-private'], showDialog: true
-}), function() {
-	// this function won't be run
-});
-
-app.get('/auth/spotify/callback', passport.authenticate('spotify', {failureRedirect: '/'}), function(req, res) {
-
-	res.redirect(200, '/');
-
-});
-
 app.use(express.static('client'))
 	.use(cors())
 	.use(cookieParser());
 
 
+app.get('/auth/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }), function() {
+	// this function won't be run
+});
+
+app.get('/auth/spotify/callback', passport.authenticate('spotify', {failureRedirect: '/'}), function(req, res) {
+
+	res.redirect('/');
+
+});
 
 
-app.get('/logout', function(req, res) {
+app.get('/logout', logout);
+app.get('/details', details);
+app.get('/search', search);
+
+/**
+ * The logout function is called when the client fetches /logout. It clears the current session so removes the details of the currently logged in user.
+ * I had to implement this as req.logout() doesn't work. It then redirects to the home page.
+ * @param {req} req req
+ * @param {res} res res
+ */
+function logout(req, res) {
 
 	req.session.destroy(function (err){
 
@@ -108,14 +115,18 @@ app.get('/logout', function(req, res) {
 
 		}
 		console.log('Logged out');
-		res.redirect(200, '/');
+		res.redirect('/');
 
 	});
 
-});
+}
 
-
-app.get('/details', function(req, res) {
+/**
+ * This function is used to check whether the currently stored login details in the session are still authenticated. If they are then it sends back the display name and the link. If not it sends back the code 204.
+ * @param {req} req req
+ * @param {res} res res
+ */
+function details(req, res) {
 
 	// console.log(req.isAuthenticated());
 	if (req.isAuthenticated()) {
@@ -124,15 +135,20 @@ app.get('/details', function(req, res) {
 
 	} else {
 
-		res.status(204).send({display_name: false, link: false});
+		res.sendStatus(204);
 
 	}
 
 
-});
+}
 
-
-app.get('/search', function(req, res){
+/**
+ * This is the function that is used to collect all the information that is required to be sent to the getHttp function that calls the Spotifty API. It trys to collect the accesstoken, users country, the text supplied in the header as well
+ * as the type and then calls httpGet and returns that with the status 200 to show it completed successfully. If there is an error then it returns error code 500 for a server error.
+ * @param {req} req req
+ * @param {res} res res
+ */
+function search(req, res){
 
 	try {
 
@@ -152,7 +168,7 @@ app.get('/search', function(req, res){
 	}
 
 
-});
+}
 
 /**
  * This function will send a GET request to the spotify api using the search term, search type, users country and access token to construct the url to send the GET request to
