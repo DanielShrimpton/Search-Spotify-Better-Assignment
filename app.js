@@ -53,16 +53,23 @@ passport.use(
 		clientSecret: client_secret,
 		callbackURL: redirect_uri
 	},
-	function(accessToken, refreshToken, expires_in, profile, done) {
-
-		process.nextTick(function(){
-
-			return done(null, {user:profile, accessToken: accessToken, refreshToken: refreshToken});
-
-		});
-
-	})
+	passUse)
 );
+
+/**
+ * The function used in passport.use to return stuff.
+ * @param {*} accessToken accessToken
+ * @param {*} refreshToken refreshToken
+ * @param {*} expires_in the time in which it expires
+ * @param {*} profile the users data
+ * @param {*} done a callback function
+ * @returns {*} done
+ */
+function passUse(accessToken, refreshToken, expires_in, profile, done) {
+
+	return done(null, {user:profile, accessToken: accessToken, refreshToken: refreshToken});
+
+}
 
 app.use(session({
 	store: new FileStore(),
@@ -104,6 +111,7 @@ function authCallback(req, res) {
  */
 function logout(req, res) {
 
+	// console.log(req.session.destroy.toString());
 	req.session.destroy(function (err){
 
 		if (err){
@@ -129,7 +137,8 @@ function details(req, res) {
 	// console.log(req.isAuthenticated());
 	if (req.isAuthenticated()) {
 
-		res.status(200).send({display_name: req.user.user._json.display_name, link: req.user.user._json.external_urls.spotify});
+		res.status(200);
+		res.send({display_name: req.user.user._json.display_name, link: req.user.user._json.external_urls.spotify});
 
 	} else {
 
@@ -155,13 +164,15 @@ function search(req, res){
 		var text = req.get('text'),
 			type = req.get('Type');
 		var content = httpGet(text, type, market, accessToken);
-		res.status(200).send(content);
+		res.status(200);
+		res.send(content);
 
 	}
 	catch (err) {
 
 		// console.error(err);
-		res.status(500).send(err);
+		res.status(500);
+		res.send(err);
 
 	}
 
@@ -215,4 +226,4 @@ function httpGet(query, type, market, accessToken){
 
 // });
 
-module.exports = {app, authCallback: authCallback};
+module.exports = {app, serial, deserial, authCallback, logout, details, search, passUse};
