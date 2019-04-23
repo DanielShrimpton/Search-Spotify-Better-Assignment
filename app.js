@@ -33,23 +33,23 @@ passport.deserializeUser(function(obj, done){
 
 });
 
-/**
- * This function checks if it is authenticated and if it is then it returns next(), else it sends a JSON so the page knows weather to show login or logout
- * @param {req} req req
- * @param {res} res res
- * @param {next} next next()
- * @returns {next} next() or a res.send
- */
-function ensureAuthenticated(req, res, next) {
+// /**
+//  * This function checks if it is authenticated and if it is then it returns next(), else it sends a JSON so the page knows weather to show login or logout
+//  * @param {req} req req
+//  * @param {res} res res
+//  * @param {next} next next()
+//  * @returns {next} next() or a res.send
+//  */
+// function ensureAuthenticated(req, res, next) {
 
-	if (req.isAuthenticated()) {
+// 	if (req.isAuthenticated()) {
 
-		return next();
+// 		return next();
 
-	}
-	res.send({display_name: false, link: false});
+// 	}
+// 	res.send({display_name: false, link: false});
 
-}
+// }
 
 passport.use(
 	new SpotifyStrategy({
@@ -106,7 +106,7 @@ app.get('/logout', function(req, res) {
 			console.error(err);
 
 		}
-
+		console.log('Logged out');
 		res.redirect('/');
 
 	});
@@ -114,10 +114,19 @@ app.get('/logout', function(req, res) {
 });
 
 
-app.get('/details', ensureAuthenticated, function(req, res) {
+app.get('/details', function(req, res) {
 
 	// console.log(req.isAuthenticated());
-	res.send({display_name: req.user.user._json.display_name, link: req.user.user._json.external_urls.spotify});
+	if (req.isAuthenticated()) {
+
+		res.send({display_name: req.user.user._json.display_name, link: req.user.user._json.external_urls.spotify});
+
+	} else {
+
+		res.status(204).send({display_name: false, link: false});
+
+	}
+
 
 });
 
