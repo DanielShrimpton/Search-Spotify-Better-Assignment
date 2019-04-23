@@ -215,4 +215,4 @@ function httpGet(query, type, market, accessToken){
 
 // });
 
-module.exports = app;
+module.exports = {app, authCallback: authCallback};
