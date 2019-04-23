@@ -21,35 +21,31 @@ var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/cal
 
 var app = express();
 
-passport.serializeUser(function(user, done){
+passport.serializeUser(serial);
+
+/**
+ * It serializes the User
+ * @param {*} user user
+ * @param {*} done done
+ */
+function serial(user, done){
 
 	done(null, user);
 
-});
+}
 
-passport.deserializeUser(function(obj, done){
+passport.deserializeUser(deserial);
+
+/**
+ * Deserializes the Uesr
+ * @param {*} obj the object returned by the login of passport.use
+ * @param {*} done done
+ */
+function deserial(obj, done){
 
 	done(null, obj);
 
-});
-
-// /**
-//  * This function checks if it is authenticated and if it is then it returns next(), else it sends a JSON so the page knows weather to show login or logout
-//  * @param {req} req req
-//  * @param {res} res res
-//  * @param {next} next next()
-//  * @returns {next} next() or a res.send
-//  */
-// function ensureAuthenticated(req, res, next) {
-
-// 	if (req.isAuthenticated()) {
-
-// 		return next();
-
-// 	}
-// 	res.send({display_name: false, link: false});
-
-// }
+}
 
 passport.use(
 	new SpotifyStrategy({
@@ -83,20 +79,22 @@ app.use(express.static('client'))
 	.use(cookieParser());
 
 
-app.get('/auth/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }), function() {
-	// this function won't be run
-});
-
-app.get('/auth/spotify/callback', passport.authenticate('spotify', {failureRedirect: '/'}), function(req, res) {
-
-	res.redirect('/');
-
-});
-
-
+app.get('/auth/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }));
+app.get('/auth/spotify/callback', passport.authenticate('spotify', {failureRedirect: '/'}), authCallback);
 app.get('/logout', logout);
 app.get('/details', details);
 app.get('/search', search);
+
+/**
+ * Redirects to the homepage after a successful login.
+ * @param {req} req req
+ * @param {res} res res
+ */
+function authCallback(req, res) {
+
+	res.redirect('/');
+
+}
 
 /**
  * The logout function is called when the client fetches /logout. It clears the current session so removes the details of the currently logged in user.
