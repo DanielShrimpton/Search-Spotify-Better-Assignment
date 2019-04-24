@@ -119,9 +119,12 @@ function logout(req, res) {
 			console.error(err);
 			res.sendStatus(500);
 
+		} else {
+
+			console.log('Logged out');
+			res.redirect('/');
+
 		}
-		console.log('Logged out');
-		res.redirect('/');
 
 	});
 
