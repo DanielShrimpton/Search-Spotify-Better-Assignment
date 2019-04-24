@@ -67,7 +67,7 @@ function passUse(accessToken, refreshToken, expires_in, profile, done) {
 
 app.use(session({
 	store: new FileStore(),
-	secret: 'keyboard cat',
+	secret: 'Y2jkcC7QB4VbCRYl',
 	resave: false,
 	saveUninitialized: false
 
