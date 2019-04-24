@@ -42,14 +42,19 @@ describe('Test the /logout', () => {
 
 	});
 
+	let res = {sendStatus: jest.fn((inp) => inp)};
 	let req = {
-		session: { destroy: jest.fn()}
+		session: { destroy: jest.fn((callback) => {
+
+			callback('TEST_ERROR');
+
+		})}
 	};
 
 	test('Test /logout error', async () => {
 
-		await logout(req, null);
-		expect(req.session.destroy.mock.calls.length).toEqual(1);
+		await logout(req, res);
+		expect(res.sendStatus.mock.calls.length).toEqual(1);
 
 	});
 
@@ -170,7 +175,6 @@ describe('Test the authCallback function', () => {
 			redirect: jest.fn()
 		};
 
-		// console.log(authCallback(null, res));
 		await authCallback(null, res);
 		expect(res.redirect.mock.calls.length).toEqual(1);
 
