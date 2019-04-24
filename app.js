@@ -1,23 +1,17 @@
 var express = require('express');
 // var request = require('request');
 var cors = require('cors');
-// var querystring = require('querystring');
-var cookieParser = require('cookie-parser');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
-require('dotenv').config;
 
 
 var client_id = '8f456770a0c5460eaff16e6476344bc5';
 var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
-// var redirect_uri = 'http://127.0.0.1:8090/callback';
-// var redirect_uri = 'http://localhost:8090/callback';
-// var redirect_uri = 'https://search-spotify-better.herokuapp.com/callback';
-var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
-// var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
+// var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
+var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
 
 var app = express();
 
@@ -82,9 +76,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static('client'))
-	.use(cors())
-	.use(cookieParser());
-
+	.use(cors());
 
 app.get('/auth/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }));
 app.get('/auth/spotify/callback', passport.authenticate('spotify', {failureRedirect: '/'}), authCallback);
