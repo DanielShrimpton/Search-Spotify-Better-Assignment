@@ -1,4 +1,25 @@
 document.getElementById('send_btn').onclick = search; // This gets the id of the submit button and onclick will run the function search()
+document.getElementById('home').onclick = home;
+
+/**
+ * Function to check if server is still running when requesting home page.
+ * @param {evt} evt evt
+ */
+function home(evt) {
+
+	fetch('/')
+		.then(handleError)
+		.then(window.location = ('/'))
+		.catch(err => {
+
+			console.error(err);
+			document.getElementById('content').innerHTML = '';
+			document.getElementById('content').innerHTML = '<h3>Server down, please try again later</h3>';
+			evt.preventDefault();
+
+		});
+
+}
 
 /**
  * Changes the inner HTML of the dropdown to the selected type and then runs change()
@@ -8,6 +29,22 @@ function Switch(type){
 
 	document.getElementById('searchDropdown').innerText = type;
 	change();
+
+}
+
+/**
+ * This function is used to check for any errors from fetches.
+ * @param {*} response the response from fetch
+ * @returns {*} the response if no errors
+ */
+function handleError(response){
+
+	if (!response.ok) {
+
+		throw Error(response.statusText);
+
+	}
+	return response;
 
 }
 
@@ -28,6 +65,7 @@ function search(evt){
 	})
 	// I found this example to create a table from this website
 	// https://www.encodedna.com/javascript/populate-json-data-to-html-table-using-javascript.htm
+		.then(handleError)
 		.then(response => response.json())
 		.then(function(data) {
 
