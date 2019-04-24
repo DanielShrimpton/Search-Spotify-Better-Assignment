@@ -10,8 +10,8 @@ var SpotifyStrategy = require('passport-spotify').Strategy;
 
 var client_id = '8f456770a0c5460eaff16e6476344bc5';
 var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
-// var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
-var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
+var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
+// var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
 
 var app = express();
 
