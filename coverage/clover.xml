@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1556090795185" clover="3.2.0">
-  <project timestamp="1556090795186" name="All files">
+<coverage generated="1556091380329" clover="3.2.0">
+  <project timestamp="1556091380329" name="All files">
     <metrics statements="56" coveredstatements="56" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9" elements="69" coveredelements="69" complexity="0" loc="56" ncloc="56" packages="1" files="1" classes="1"/>
     <file name="app.js" path="X:\C\Users\Dan\OneDrive - Durham University\Documents\ComSci\Programming\Assignment 2\app.js">
       <metrics statements="56" coveredstatements="56" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9"/>
@@ -43,22 +43,22 @@
       <line num="143" count="3" type="stmt"/>
       <line num="144" count="3" type="stmt"/>
       <line num="148" count="1" type="stmt"/>
-      <line num="163" count="3" type="stmt"/>
-      <line num="165" count="3" type="stmt"/>
-      <line num="166" count="2" type="stmt"/>
-      <line num="167" count="2" type="stmt"/>
-      <line num="168" count="2" type="stmt"/>
-      <line num="169" count="2" type="stmt"/>
-      <line num="170" count="2" type="stmt"/>
-      <line num="171" count="2" type="stmt"/>
+      <line num="163" count="4" type="stmt"/>
+      <line num="165" count="4" type="stmt"/>
+      <line num="166" count="3" type="stmt"/>
+      <line num="167" count="3" type="stmt"/>
+      <line num="168" count="3" type="stmt"/>
+      <line num="169" count="3" type="stmt"/>
+      <line num="170" count="3" type="stmt"/>
+      <line num="171" count="3" type="stmt"/>
       <line num="177" count="1" type="stmt"/>
       <line num="178" count="1" type="stmt"/>
-      <line num="196" count="2" type="stmt"/>
-      <line num="197" count="2" type="stmt"/>
-      <line num="198" count="2" type="stmt"/>
-      <line num="199" count="2" type="stmt"/>
-      <line num="200" count="2" type="stmt"/>
-      <line num="201" count="2" type="stmt"/>
+      <line num="196" count="3" type="stmt"/>
+      <line num="197" count="3" type="stmt"/>
+      <line num="198" count="3" type="stmt"/>
+      <line num="199" count="3" type="stmt"/>
+      <line num="200" count="3" type="stmt"/>
+      <line num="201" count="3" type="stmt"/>
       <line num="232" count="1" type="stmt"/>
     </file>
   </project>
