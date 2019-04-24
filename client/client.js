@@ -97,9 +97,6 @@ function search(evt){
 					var tabCell2 = tr.insertCell(-1);
 					tabCell2.innerHTML = data[type].items[i].artists[0].name;
 
-					// var tabCell3 = tr.insertCell(-1);
-					// tabCell3.innerHTML = data[type].items[i].album.name;
-
 				}
 
 				var divContainer = document.getElementById('content');
