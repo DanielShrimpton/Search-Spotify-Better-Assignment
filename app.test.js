@@ -135,10 +135,16 @@ describe('Test the /search', () => {
 
 	});
 
-	test('Test search function with mocking authentication sends the error from getHttp() with invalid access token', async () => {
+	test('Test search function with mocking authentication sends the error from getHttp() with invalid access token for 401', async () => {
 
 		await search(req, res);
 		expect(JSON.parse(res.send.mock.results[0].value).error.status).toEqual(401);
+
+	});
+
+	test('Test search function with mocking authentication sends the error from getHttp() with invalid access token with message "invalid access token"', async () => {
+
+		await search(req, res);
 		expect(JSON.parse(res.send.mock.results[0].value).error.message).toEqual('Invalid access token');
 
 	});
