@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "dev": "nodemon server.js --ignore *.json --ignore sessions/",
     "start": "node server.js",
     "pretest": "eslint client/client.js app.js server.js"
