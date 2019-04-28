@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1556100317678" clover="3.2.0">
-  <project timestamp="1556100317679" name="All files">
+<coverage generated="1556461331694" clover="3.2.0">
+  <project timestamp="1556461331694" name="All files">
     <metrics statements="54" coveredstatements="54" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9" elements="67" coveredelements="67" complexity="0" loc="54" ncloc="54" packages="1" files="1" classes="1"/>
     <file name="app.js" path="X:\C\Users\Dan\OneDrive - Durham University\Documents\ComSci\Programming\Assignment 2\app.js">
       <metrics statements="54" coveredstatements="54" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9"/>
@@ -13,7 +13,7 @@
       <line num="8" count="1" type="stmt"/>
       <line num="11" count="1" type="stmt"/>
       <line num="12" count="1" type="stmt"/>
-      <line num="13" count="1" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
       <line num="16" count="1" type="stmt"/>
       <line num="18" count="1" type="stmt"/>
       <line num="27" count="1" type="stmt"/>
