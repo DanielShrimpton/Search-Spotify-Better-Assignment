@@ -9,7 +9,7 @@ function home(evt) {
 
 	fetch('/')
 		.then(handleError)
-		.then(window.location = ('/'))
+		.then(document.getElementById('content').innerHTML = '')
 		.catch(err => {
 
 			console.error(err);
