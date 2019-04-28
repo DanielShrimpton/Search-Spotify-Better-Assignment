@@ -86,8 +86,8 @@ app.get('/search', search);
 
 /**
  * Redirects to the homepage after a successful login.
- * @param {req} req req
- * @param {res} res res
+ * @param {Object} req Request JSON
+ * @param {Object} res Response JSON
  */
 function authCallback(req, res) {
 
@@ -98,8 +98,8 @@ function authCallback(req, res) {
 /**
  * The logout function is called when the client fetches /logout. It clears the current session so removes the details of the currently logged in user.
  * I had to implement this as req.logout() doesn't work. It then redirects to the home page.
- * @param {req} req req
- * @param {res} res res
+ * @param {Object} req Request JSON
+ * @param {Object} res Response JSON
  */
 function logout(req, res) {
 
@@ -124,8 +124,8 @@ function logout(req, res) {
 
 /**
  * This function is used to check whether the currently stored login details in the session are still authenticated. If they are then it sends back the display name and the link. If not it sends back the code 204.
- * @param {req} req req
- * @param {res} res res
+ * @param {Object} req Request JSON
+ * @param {Object} res Response JSON
  */
 function details(req, res) {
 
@@ -147,8 +147,8 @@ function details(req, res) {
 /**
  * This is the function that is used to collect all the information that is required to be sent to the getHttp function that calls the Spotifty API. It trys to collect the accesstoken, users country, the text supplied in the header as well
  * as the type and then calls httpGet and returns that with the status 200 to show it completed successfully. If there is an error then it returns error code 500 for a server error.
- * @param {req} req req
- * @param {res} res res
+ * @param {Object} req Request JSON
+ * @param {Object} res Response JSON
  */
 function search(req, res){
 
