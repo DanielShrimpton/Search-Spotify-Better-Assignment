@@ -171,7 +171,7 @@ describe('Test the login workflow', () => {
 
 });
 
-// Got from https://stackoverflow.com/a/49143644
+// Got inspiration from https://stackoverflow.com/a/49143644
 
 describe('Test the authCallback function', () => {
 
