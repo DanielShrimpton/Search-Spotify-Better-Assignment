@@ -19,8 +19,8 @@ passport.serializeUser(serial);
 
 /**
  * It serializes the User
- * @param {*} user user
- * @param {*} done done
+ * @param {*} user user object passed from passport
+ * @param {*} done a callback function
  */
 function serial(user, done){
 
@@ -33,7 +33,7 @@ passport.deserializeUser(deserial);
 /**
  * Deserializes the Uesr
  * @param {*} obj the object returned by the login of passport.use
- * @param {*} done done
+ * @param {*} done a callback function
  */
 function deserial(obj, done){
 
@@ -52,12 +52,12 @@ passport.use(
 
 /**
  * The function used in passport.use to return stuff.
- * @param {*} accessToken accessToken
- * @param {*} refreshToken refreshToken
- * @param {*} expires_in the time in which it expires
+ * @param {*} accessToken accessToken returned from spotify login
+ * @param {*} refreshToken refreshToken returned from spotify login
+ * @param {*} expires_in the time in which the accessToken expires
  * @param {*} profile the users data
  * @param {*} done a callback function
- * @returns {*} done
+ * @returns {*} returns the callback function
  */
 function passUse(accessToken, refreshToken, expires_in, profile, done) {
 
@@ -129,7 +129,6 @@ function logout(req, res) {
  */
 function details(req, res) {
 
-	// console.log(req.isAuthenticated());
 	if (req.isAuthenticated()) {
 
 		res.status(200);
@@ -165,7 +164,7 @@ function search(req, res){
 	}
 	catch (err) {
 
-		// console.error(err);
+		console.error(err);
 		res.status(500);
 		res.send(err);
 
@@ -184,7 +183,6 @@ function search(req, res){
  */
 function httpGet(query, type, market, accessToken){
 
-	// console.log(accessToken);
 	var xmlHttp = new XMLHttpRequest();
 	var url = 'https://api.spotify.com/v1/search?query='+query+'&type='+type+'&limit=50&market='+market;
 	xmlHttp.open('GET', url, false);
@@ -193,32 +191,5 @@ function httpGet(query, type, market, accessToken){
 	return xmlHttp.responseText;
 
 }
-
-
-// app.get('/refresh_token', function(req) {
-
-// 	// requesting access token from refresh token
-// 	var refresh_token = req.query.refresh_token;
-// 	var authOptions = {
-// 		url: 'https://accounts.spotify.com/api/token',
-// 		headers: { 'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')) },
-// 		form: {
-// 			grant_type: 'refresh_token',
-// 			refresh_token: refresh_token
-// 		},
-// 		json: true
-// 	};
-
-// 	request.post(authOptions, function(error, response, body) {
-
-// 		if (!error && response.statusCode === 200) {
-
-// 			var access_token = body.access_token;
-
-// 		}
-
-// 	});
-
-// });
 
 module.exports = {app, serial, deserial, authCallback, logout, details, search, passUse};
