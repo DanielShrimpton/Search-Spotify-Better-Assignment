@@ -1,6 +1,7 @@
-.idea/
-node_modules/
-.vscode/
+**/.idea
+**/node_modules
+**/.vscode/
 test.json
-sessions/*
-coverage/
+**/sessions/*
+**/coverage
+*.env
