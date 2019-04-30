@@ -6,10 +6,11 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
+require('dotenv').config();
 
 
 var client_id = '8f456770a0c5460eaff16e6476344bc5';
-var client_secret = '00fa8fe4d3e8479eb1509bcdc03c7800';
+var client_secret = process.env.CLIENT_SECRET;
 var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
 // var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
 
