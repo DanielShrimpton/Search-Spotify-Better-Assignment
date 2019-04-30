@@ -10,4 +10,5 @@ This documentation is here to give a brief insight into how the API and this exa
 This is an example server file that uses the `app.js` file's export and runs a server listening on either the supplied port in the environment variables or port 8090.
 
 ## app.js
-This is the main file for the api service. It is where all of the 
+This is the main file for the api service. It is where all of the `GET` requests, authentication through spotify, session handling and main functions are. 
+
