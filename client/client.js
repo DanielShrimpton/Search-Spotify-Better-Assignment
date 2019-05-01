@@ -314,6 +314,10 @@ $(window).on('resize', function() {
 		$('#content').addClass('table');
 		$('#content').removeClass('table-sm');
 		$('#body').removeClass('limit400');
+		$('#push').addClass('push');
+		$('#footer').addClass('footer');
+		$('#push').removeClass('pushm');
+		$('#footer').removeClass('footerm');
 		console.log('Big screen');
 
 	} else {
@@ -322,6 +326,10 @@ $(window).on('resize', function() {
 		$('#content').addClass('table-sm');
 		$('#content').removeClass('table');
 		$('#body').addClass('limit400');
+		$('#push').removeClass('push');
+		$('#footer').removeClass('footer');
+		$('#push').addClass('pushm');
+		$('#footer').addClass('footerm');
 		console.log('small screen');
 
 	}

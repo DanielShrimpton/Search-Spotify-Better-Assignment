@@ -134,9 +134,19 @@
   .wrapper {
     min-height: 100%;
 
-    margin-bottom: -100px
+    margin-bottom: -110px
   }
 
   .footer, .push {
-    height: 100px
+    height: 110px
+  }
+
+  .wrapperm {
+    min-height: 100%;
+
+    margin-bottom: -250px
+  }
+
+  .footerm, .pushm {
+    height: 250px
   }
