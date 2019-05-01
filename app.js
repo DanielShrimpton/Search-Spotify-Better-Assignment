@@ -8,10 +8,9 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 require('dotenv').config();
 
 
-const client_id = '8f456770a0c5460eaff16e6476344bc5';
+const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-const redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
-// const redirect_uri = 'http://localhost:8090/auth/spotify/callback';
+const redirect_uri = process.env.REDIRECT_URI;
 
 const app = express();
 
