@@ -1,5 +1,4 @@
 var express = require('express');
-// var request = require('request');
 var cors = require('cors');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 var session = require('express-session');
