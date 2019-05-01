@@ -111,9 +111,10 @@
     background-color: #b9bbbe;
   }
 
-  body {
+  html, body {
+    height: 100%;
     padding-top: 80px;
-    padding-bottom: 40px;
+    /* padding-bottom: 40px; */
   }
   
   .center {
@@ -128,4 +129,14 @@
 
   .limit400 {
     font-size: 10px
+  }
+
+  .wrapper {
+    min-height: 100%;
+
+    margin-bottom: -100px
+  }
+
+  .footer, .push {
+    height: 100px
   }
