@@ -79,3 +79,24 @@ httpGet is a function used to perform a Spotify search using their web API.
 A more detailed look into these functions and overall view of this server-side code can be found [here](https://search-spotify-better.herokuapp.com/out/index.html)
 
 # Client-Side Documentation
+This is a brief look at how the example works.
+
+There are two main files to this example, `index.html` and `client.js` both contained within the client folder. This example is a single page website with dynamically updated html through `client.js`. When the page loads, it has a search bar at the top, a  search button, a login button, a selection for search type and a home button (the name on the navbar).
+
+ When the user requests to login, the website is redirected to the Spotify Authentication site, as this is the only way to authenticate with Spotify. It then returns to the page and displays the Username in the top right as a dropdown, giving the option to logout or view their profile on Spotify. This information about who is logged in is sent in a JSON response from the server (explained more in the API documentation).
+
+ Once logged in, the user in the current session is now authenticated to make search requests to the Spotify API. They do this by choosing the search type next to the search bar and then typing the search query and either pressing enter or pressing the search button. This will then send this search query and type to the server which will then deal with the request. It then returns the results in a JSON response which is then dealt with and dynamically updated into a table using javascript to change/add html as required. 
+
+ If the search returns no results it will tell you so, by handling the error correctly. If there is no search term it will also tell you to enter a search term. If the server disconnects for whatever reason it also handles that gracefully by alerting the user and displaying 'Server down, please try again later'. 
+
+ For a more detailed look at the functions used in `client.js` [click here](https://search-spotify-better.herokuapp.com/out/index.html)
+
+# Licensing
+
+Spotify's Licensing -> https://developer.spotify.com/terms/
+
+ # Known bugs
+
+ When creating or loading a session, `Error: EPERM: operation not permitted, rename 'path\to\file.json.numbers' -> 'path/to/file.json` is an operating system error, even though it completes successfully. It is not due to my code, it is part of the session Filestore.
+ 
+ When destroying a session on logout `[session-file-store] will retry, error on last attempt: Error: ENOENT: no such file or directory, open` is an error in the server console which is again another error with sessions Filestore. 
