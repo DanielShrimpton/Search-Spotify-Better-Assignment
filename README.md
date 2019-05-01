@@ -89,7 +89,7 @@ There are two main files to this example, `index.html` and `client.js` both cont
 
  If the search returns no results it will tell you so, by handling the error correctly. If there is no search term it will also tell you to enter a search term. If the server disconnects for whatever reason it also handles that gracefully by alerting the user and displaying 'Server down, please try again later'. 
 
- For a more detailed look at the functions used in `client.js` at the top of the page
+ For a more detailed look at the functions used in `client.js` follow the link at the top of the page
 
 # Licensing
 
