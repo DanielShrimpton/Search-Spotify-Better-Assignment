@@ -1,0 +1,109 @@
+<h1 id="searchspotifybetterreadme">Search-Spotify-Better README</h1>
+
+<p>This documentation is here to give a brief insight into how the API and this example works. <a href="https://search-spotify-better.herokuapp.com/out/app.js.index.html">Here</a> is a link to a more in-depth documentation for the server, and <a href="https://search-spotify-better.herokuapp.com/out/client.js.index.html">here</a> for the client-side documentation.</p>
+
+<p>The purpose of this example is to connect to the Spotify API using a client secret token, a client id and a redirect url. Once the authentication has been verified, the api then connects to the Spotify service to search for tracks, albums or artists.</p>
+
+<h1 id="serversidedocumentation">Server-Side Documentation</h1>
+
+<h1 id="serverjs">server.js</h1>
+
+<pre><code class="Javascript language-Javascript">    const app = require('./app').app;
+
+    app.listen(process.env.PORT || 8090);
+</code></pre>
+
+<p>This is an example server file that uses the <code>app.js</code> file's export and runs a server listening on either the supplied port in the environment variables or port 8090. The reason that <code>server.js</code> and <code>app.js</code> are separated is so that <code>app.js</code> can be fully jest tested and also so that a custom server can be built around the use of this API.</p>
+
+<h1 id="appjs">app.js</h1>
+
+<p>This is the main file for the api service. It is where all of the <code>GET</code> requests, authentication through spotify, session handling and main functions are dealt with and contained. </p>
+
+<h2 id="requiredmodules">Required modules</h2>
+
+<pre><code class="Javascript language-Javascript">    var express = require('express');
+    var cors = require('cors');
+    var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+    var session = require('express-session');
+    var FileStore = require('session-file-store')(session);
+    var passport = require('passport');
+    var SpotifyStrategy = require('passport-spotify').Strategy;
+    require('dotenv').config();
+</code></pre>
+
+<p>These are the required modules that are needed for all the functionality of the api to work. They are all automatically installed with <code>npm install</code>.</p>
+
+<h2 id="httpgetmethods">Http GET methods</h2>
+
+<pre><code class="Javascript language-Javascript">    app.get('/auth/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }));
+    app.get('/auth/spotify/callback', passport.authenticate('spotify', {failureRedirect: '/'}), authCallback);
+    app.get('/logout', logout);
+    app.get('/details', details);
+    app.get('/search', search);
+</code></pre>
+
+<p>These are all the GET methods for the main functionality of the website.</p>
+
+<p><code>/auth/spotify</code> calls the authenticate function for the Spotify method supplied by the <code>Passport</code> module. This makes authentication really easy and helps with session handling for multiple users. </p>
+
+<p><code>/auth/spotify/callback</code> is the callback URL that is assigned in the app settings on <a href="https://developer.spotify.com/dashboard">developer.spotify.com</a> which is where you also get your client secret from. Upon correct completion from the authentication from Spotify, it will then call the callback function <code>authCallback</code>. </p>
+
+<p>The last three GET methods all call the named functions which are explained later.</p>
+
+<h2 id="environmentvariables">Environment variables</h2>
+
+<p>Using the <code>dotenv</code> package this allows the app to take advantage of environment variables that can be supplied by the user. There needs to be a <code>.env</code> file in the local directory where <code>app.js</code> is located (or an online deployment may have a built in solution for this). This means that you can distribute your application without giving away the client secret. #</p>
+
+<pre><code class="Javascript language-Javascript">    const client_id = process.env.CLIENT_ID;
+    const client_secret = process.env.CLIENT_SECRET;
+    const redirect_uri = process.env.REDIRECT_URI;
+</code></pre>
+
+<p>This is an example of the ones included in this app. They are accessed through using <code>process.env.VARIABLE_IN_CAPS</code>.</p>
+
+<h2 id="functions">Functions</h2>
+
+<p>There are eight functions that are called in this file. They are:</p>
+
+<pre><code>serial, deserial, passUse, authCallback, logout, details, search, httpGet
+</code></pre>
+
+<p>In short, serial is a function for the serialization of a user, deserial is for the opposite of this.</p>
+
+<p>passUse is a function that returns information gathered from the passport-Spotify authentication process.</p>
+
+<p>authCallback is a function that is called upon return from Spotify authentication.</p>
+
+<p>logout is a function to logout the current user.</p>
+
+<p>details is a function to return the details of the currently logged in user.</p>
+
+<p>search is a function used to ready data for passing to the httpGet function</p>
+
+<p>httpGet is a function used to perform a Spotify search using their web API.</p>
+
+<p>A more detailed look into these functions and overall view of this server-side code can be found at the link at the top of the page</p>
+
+<h1 id="clientsidedocumentation">Client-Side Documentation</h1>
+
+<p>This is a brief look at how the example works.</p>
+
+<p>There are two main files to this example, <code>index.html</code> and <code>client.js</code> both contained within the client folder. This example is a single page website with dynamically updated html through <code>client.js</code>. When the page loads, it has a search bar at the top, a  search button, a login button, a selection for search type and a home button (the name on the navbar).</p>
+
+<p>When the user requests to login, the website is redirected to the Spotify Authentication site, as this is the only way to authenticate with Spotify. It then returns to the page and displays the Username in the top right as a dropdown, giving the option to logout or view their profile on Spotify. This information about who is logged in is sent in a JSON response from the server (explained more in the API documentation).</p>
+
+<p>Once logged in, the user in the current session is now authenticated to make search requests to the Spotify API. They do this by choosing the search type next to the search bar and then typing the search query and either pressing enter or pressing the search button. This will then send this search query and type to the server which will then deal with the request. It then returns the results in a JSON response which is then dealt with and dynamically updated into a table using javascript to change/add html as required. </p>
+
+<p>If the search returns no results it will tell you so, by handling the error correctly. If there is no search term it will also tell you to enter a search term. If the server disconnects for whatever reason it also handles that gracefully by alerting the user and displaying 'Server down, please try again later'. </p>
+
+<p>For a more detailed look at the functions used in <code>client.js</code> at the top of the page</p>
+
+<h1 id="licensing">Licensing</h1>
+
+<p>Spotify's Licensing -> https://developer.spotify.com/terms/</p>
+
+<h1 id="knownbugs">Known bugs</h1>
+
+<p>When creating or loading a session, <code>Error: EPERM: operation not permitted, rename 'path\to\file.json.numbers' -&gt; 'path/to/file.json</code> is an operating system error, even though it completes successfully. It is not due to my code, it is part of the session Filestore.</p>
+
+<p>When destroying a session on logout <code>[session-file-store] will retry, error on last attempt: Error: ENOENT: no such file or directory, open</code> is an error in the server console which is again another error with sessions Filestore. </p>
