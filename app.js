@@ -1,19 +1,19 @@
-var express = require('express');
-var cors = require('cors');
-var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-var session = require('express-session');
-var FileStore = require('session-file-store')(session);
-var passport = require('passport');
-var SpotifyStrategy = require('passport-spotify').Strategy;
+const express = require('express');
+const cors = require('cors');
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+const passport = require('passport');
+const SpotifyStrategy = require('passport-spotify').Strategy;
 require('dotenv').config();
 
 
-var client_id = '8f456770a0c5460eaff16e6476344bc5';
-var client_secret = process.env.CLIENT_SECRET;
-var redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
-// var redirect_uri = 'http://localhost:8090/auth/spotify/callback';
+const client_id = '8f456770a0c5460eaff16e6476344bc5';
+const client_secret = process.env.CLIENT_SECRET;
+const redirect_uri = 'https://search-spotify-better.herokuapp.com/auth/spotify/callback';
+// const redirect_uri = 'http://localhost:8090/auth/spotify/callback';
 
-var app = express();
+const app = express();
 
 passport.serializeUser(serial);
 
@@ -153,11 +153,11 @@ function search(req, res){
 
 	try {
 
-		var accessToken = req.user.accessToken;
-		var market = req.user.user.country;
-		var text = req.get('text'),
+		let accessToken = req.user.accessToken;
+		let market = req.user.user.country;
+		let text = req.get('text'),
 			type = req.get('Type');
-		var content = httpGet(text, type, market, accessToken);
+		let content = httpGet(text, type, market, accessToken);
 		res.status(200);
 		res.send(content);
 
@@ -183,8 +183,8 @@ function search(req, res){
  */
 function httpGet(query, type, market, accessToken){
 
-	var xmlHttp = new XMLHttpRequest();
-	var url = 'https://api.spotify.com/v1/search?query='+query+'&type='+type+'&limit=50&market='+market;
+	const xmlHttp = new XMLHttpRequest();
+	let url = 'https://api.spotify.com/v1/search?query='+query+'&type='+type+'&limit=50&market='+market;
 	xmlHttp.open('GET', url, false);
 	xmlHttp.setRequestHeader('Authorization', 'Bearer '+accessToken);
 	xmlHttp.send(null);
