@@ -13,6 +13,7 @@ function home(evt) {
 		.catch(err => {
 
 			console.error(err);
+			alert(err);
 			document.getElementById('content').innerHTML = '';
 			document.getElementById('content').innerHTML = '<h3>Server down, please try again later</h3>';
 			evt.preventDefault();
@@ -41,6 +42,7 @@ function handleError(response){
 
 	if (!response.ok) {
 
+		alert(response.statusText);
 		throw Error(response.statusText);
 
 	}
@@ -229,6 +231,7 @@ function search(evt){
 		})
 		.catch(function(err){
 
+			alert(err);
 			console.error(err);
 			if (err.status === 500) {
 
@@ -265,6 +268,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	Switch('Tracks');
 
 	fetch('/details')
+		.then(handleError)
 		.then(function(response) {
 
 			if (response.status === 204) {
