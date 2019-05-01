@@ -1,5 +1,5 @@
 # Search-Spotify-Better README
-This documentation is here to give a brief insight into how the API and this example works. [Here](https://search-spotify-better.herokuapp.com/out/index.html) is a link to a more in-depth documentation.
+This documentation is here to give a brief insight into how the API and this example works. [Here](https://search-spotify-better.herokuapp.com/out/app.js.index.html) is a link to a more in-depth documentation for the server, and [here](https://search-spotify-better.herokuapp.com/out/client.js.index.html) for the client-side documentation.
 
 The purpose of this example is to connect to the Spotify API using a client secret token, a client id and a redirect url. Once the authentication has been verified, the api then connects to the Spotify service to search for tracks, albums or artists.
 
@@ -76,7 +76,7 @@ search is a function used to ready data for passing to the httpGet function
 
 httpGet is a function used to perform a Spotify search using their web API.
 
-A more detailed look into these functions and overall view of this server-side code can be found [here](https://search-spotify-better.herokuapp.com/out/index.html)
+A more detailed look into these functions and overall view of this server-side code can be found at the link at the top of the page
 
 # Client-Side Documentation
 This is a brief look at how the example works.
@@ -89,7 +89,7 @@ There are two main files to this example, `index.html` and `client.js` both cont
 
  If the search returns no results it will tell you so, by handling the error correctly. If there is no search term it will also tell you to enter a search term. If the server disconnects for whatever reason it also handles that gracefully by alerting the user and displaying 'Server down, please try again later'. 
 
- For a more detailed look at the functions used in `client.js` [click here](https://search-spotify-better.herokuapp.com/out/index.html)
+ For a more detailed look at the functions used in `client.js` at the top of the page
 
 # Licensing
 
