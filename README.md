@@ -95,7 +95,7 @@ There are two main files to this example, `index.html` and `client.js` both cont
 
 Spotify's Licensing -> https://developer.spotify.com/terms/
 
- # Known bugs
+# Known bugs
 
  When creating or loading a session, `Error: EPERM: operation not permitted, rename 'path\to\file.json.numbers' -> 'path/to/file.json` is an operating system error, even though it completes successfully. It is not due to my code, it is part of the session Filestore.
  
