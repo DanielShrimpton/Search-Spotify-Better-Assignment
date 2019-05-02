@@ -58,6 +58,31 @@ function handleError(response){
 function search(evt){
 
 	evt.preventDefault();
+	fetch('/details')
+		.then(handleError)
+		.then(function(response) {
+
+			if (response.status === 204) {
+
+				return {display_name: false, link: false};
+
+			} else {
+
+				return response.json();
+
+			}
+
+		})
+		.then(function(data){
+
+			if (!data.display_name){
+
+				alert('Please sign in to search');
+				throw new Error('Please sign in');
+
+			}
+
+		});
 	var search = document.getElementById('txt_field').value; // This gets the value of the search bar
 	var type = document.getElementById('searchDropdown').innerText.toLowerCase();
 	var type2 = type.substring(0, type.length-1);
@@ -298,6 +323,8 @@ document.addEventListener('DOMContentLoaded', function(){
 				// console.log(data);
 				$('#login').show();
 				$('#loggedin').hide();
+				document.getElementById('content').innerHTML = '';
+				document.getElementById('content').innerHTML = '<h3>Please sign in to search</h3>';
 
 			}
 
