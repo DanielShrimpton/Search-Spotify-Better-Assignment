@@ -3,6 +3,8 @@ This documentation is here to give a brief insight into how the API and this exa
 
 The purpose of this example is to connect to the Spotify API using a client secret token, a client id and a redirect url. Once the authentication has been verified, the api then connects to the Spotify service to search for tracks, albums or artists.
 
+There is an example of this app being hosted at [https://search-spotify-better.herokuapp.com/](https://search-spotify-better.herokuapp.com/) but if you want to set up/test this example yourself, you will need to create an app using the Spotify developer dashboard, found [here](https://developer.spotify.com/dashboard) and place the required variables in a `.env` file. More explained on that later.
+
 # Server-Side Documentation
 
 # server.js
@@ -93,7 +95,7 @@ There are two main files to this example, `index.html` and `client.js` both cont
 
 # Licensing
 
-Spotify's Licensing -> https://developer.spotify.com/terms/
+Spotify's Licensing -> [https://developer.spotify.com/terms/](https://developer.spotify.com/terms/)
 
 # Known bugs
 
