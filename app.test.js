@@ -87,6 +87,13 @@ describe('Test the /details', () => {
 
 	});
 
+	test('Test /details returns JSON type', async () => {
+
+		await details(req, res);
+		expect(typeof(res.send.mock.results[0].value)).toEqual('object');
+
+	});
+
 	test('Test /details with simulating some details returns "TEST_NAME"', async () => {
 
 		await details(req, res);
