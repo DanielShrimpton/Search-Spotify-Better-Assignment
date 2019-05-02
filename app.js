@@ -30,7 +30,7 @@ function serial(user, done){
 passport.deserializeUser(deserial);
 
 /**
- * Deserializes the Uesr
+ * Deserializes the User
  * @param {*} obj the object returned by the login of passport.use
  * @param {*} done a callback function
  */

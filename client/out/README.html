@@ -10,6 +10,8 @@
 
         <p>The purpose of this example is to connect to the Spotify API using a client secret token, a client id and a redirect url. Once the authentication has been verified, the api then connects to the Spotify service to search for tracks, albums or artists.</p>
 
+        <p>There is an example of this app being hosted at <a href="https://search-spotify-better.herokuapp.com/">https://search-spotify-better.herokuapp.com/</a> but if you want to set up/test this example yourself, you will need to create an app using the Spotify developer dashboard, found <a href="https://developer.spotify.com/dashboard">here</a> and place the required variables in a <code>.env</code> file. More explained on that later.</p>
+
         <h1 id="serversidedocumentation">Server-Side Documentation</h1>
 
         <h1 id="serverjs">server.js</h1>
@@ -90,6 +92,38 @@
 
         <p>A more detailed look into these functions and overall view of this server-side code can be found at the link at the top of the page</p>
 
+        <h2 id="authentication">Authentication</h2>
+
+        <p>For this app I am using the Spotify method of passportjs. It is useful as it helps to handle authentication as well as set up multiple sessions for multiple users. </p>
+
+        <pre><code class="Javascript language-Javascript">const passport = require('passport');
+        const SpotifyStrategy = require('passport-spotify').Strategy;
+
+        passport.serializeUser(serial);
+        passport.deserializeUser(deserial);
+
+        passport.use(
+            new SpotifyStrategy({
+                clientID: client_id,
+                clientSecret: client_secret,
+                callbackURL: redirect_uri
+            },
+            passUse)
+        );
+
+        app.use(session({
+            store: new FileStore(),
+            secret: 'Y2jkcC7QB4VbCRYl',
+            resave: false,
+            saveUninitialized: false
+
+        }));
+        app.use(passport.initialize());
+        app.use(passport.session());
+        </code></pre>
+
+        <p>where passUse is my own custom function for dealing with the returned data. It includes the usage of session to create a new local file to store multiple users sessions. It helps with making the workflow easier and makes code easier to read.</p>
+
         <h1 id="clientsidedocumentation">Client-Side Documentation</h1>
 
         <p>This is a brief look at how the example works.</p>
@@ -102,11 +136,11 @@
 
         <p>If the search returns no results it will tell you so, by handling the error correctly. If there is no search term it will also tell you to enter a search term. If the server disconnects for whatever reason it also handles that gracefully by alerting the user and displaying 'Server down, please try again later'. </p>
 
-        <p>For a more detailed look at the functions used in <code>client.js</code> at the top of the page</p>
+        <p>For a more detailed look at the functions used in <code>client.js</code> follow the link at the top of the page</p>
 
         <h1 id="licensing">Licensing</h1>
 
-        <p>Spotify's Licensing -> https://developer.spotify.com/terms/</p>
+        <p>Spotify's Licensing -> <a href="https://developer.spotify.com/terms/">https://developer.spotify.com/terms/</a></p>
 
         <h1 id="knownbugs">Known bugs</h1>
 

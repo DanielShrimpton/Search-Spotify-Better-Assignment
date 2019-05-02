@@ -80,6 +80,37 @@ httpGet is a function used to perform a Spotify search using their web API.
 
 A more detailed look into these functions and overall view of this server-side code can be found at the link at the top of the page
 
+## Authentication
+For this app I am using the Spotify method of passportjs. It is useful as it helps to handle authentication as well as set up multiple sessions for multiple users. 
+```Javascript
+const passport = require('passport');
+const SpotifyStrategy = require('passport-spotify').Strategy;
+
+passport.serializeUser(serial);
+passport.deserializeUser(deserial);
+
+passport.use(
+	new SpotifyStrategy({
+		clientID: client_id,
+		clientSecret: client_secret,
+		callbackURL: redirect_uri
+	},
+	passUse)
+);
+
+app.use(session({
+	store: new FileStore(),
+	secret: 'Y2jkcC7QB4VbCRYl',
+	resave: false,
+	saveUninitialized: false
+
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+```
+where passUse is my own custom function for dealing with the returned data. It includes the usage of session to create a new local file to store multiple users sessions. It helps with making the workflow easier and makes code easier to read.
+
 # Client-Side Documentation
 This is a brief look at how the example works.
 
